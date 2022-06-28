@@ -3,9 +3,6 @@ import { ReactNode } from "react"
 import { Header } from "../components"
 import { Footer } from "../components/Footer"
 
-const image =
-  "https://res.cloudinary.com/resource-network/image/upload/v1651186746/resource-protocol/nibera/3_xrl3sh.jpg"
-
 export const Layout = ({ children }: { children?: ReactNode }) => (
   <>
     <div className="stars"></div>
