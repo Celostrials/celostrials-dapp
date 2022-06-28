@@ -181,7 +181,12 @@ const Mint = ({ myRef }: any) => {
               colorScheme="primary"
               justifyContent="space-between"
               rightIcon={
-                <Image className="ufo" width="2em" src={"images/ufo.svg"} />
+                <Image
+                  alt="ufo"
+                  className="ufo"
+                  width="2em"
+                  src={"images/ufo.svg"}
+                />
               }
               isLoading={loading}
               disabled={disabled}

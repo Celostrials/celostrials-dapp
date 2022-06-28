@@ -97,7 +97,11 @@ const Minted = ({ token, txHash }: MintProps) => {
                   <Heading size="lg">{tokenData.name}</Heading>
                 </HStack>
               )}
-              <Image className="homeCard" src={getTokenImage(token.id)} />
+              <Image
+                alt={token.id}
+                className="homeCard"
+                src={getTokenImage(token.id)}
+              />
             </VStack>
           </VStack>
           <VStack>
