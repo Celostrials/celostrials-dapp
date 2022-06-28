@@ -28,12 +28,8 @@ import { useCallback, useMemo } from "react"
 
 import { nanoid } from "../../functions"
 import { trimAddress } from "../../functions/address"
-import { formatBN } from "../../functions/bignumber"
 import { useAddress } from "../../hooks/useAccount"
-import {
-  useLockedSourceBalance,
-  useSourceBalance,
-} from "../../hooks/useSourceBalance"
+
 import {
   useClearTransactions,
   useGetTransactions,
@@ -244,13 +240,6 @@ export const AccountModal = ({
 }
 
 const AccountInfo = ({ address }: { address: string }) => {
-  const sBalance = formatBN(useSourceBalance(address))
-  const lsBalance = formatBN(useLockedSourceBalance(address))
-  const startBal = usePrevious(parseFloat(sBalance))
-  const endBal = parseFloat(sBalance)
-  const startLocked = usePrevious(parseFloat(lsBalance))
-  const endLocked = parseFloat(lsBalance)
-
   return (
     <HStack my="1.5em">
       <HStack
@@ -262,19 +251,7 @@ const AccountInfo = ({ address }: { address: string }) => {
         px="1em"
       >
         <FontAwesomeIcon icon={faLock as IconProp} color="black" />
-        <Text ml="1em" w="max-content" color="black" fontSize="md">
-          <CountUp
-            start={startLocked}
-            end={endLocked}
-            duration={0.5}
-            decimals={0}
-            delay={0}
-            separator=","
-            suffix=" SOURCE"
-          >
-            {({ countUpRef }) => <span ref={countUpRef} />}
-          </CountUp>
-        </Text>
+        <Text ml="1em" w="max-content" color="black" fontSize="md"></Text>
       </HStack>
       <HStack
         h="10"
@@ -284,19 +261,7 @@ const AccountInfo = ({ address }: { address: string }) => {
         borderRadius="xl"
         py="0"
       >
-        <Text w="max-content" px="1em" color="white" fontSize="md">
-          <CountUp
-            start={startBal}
-            end={endBal}
-            duration={0.5}
-            decimals={0}
-            delay={0}
-            separator=","
-            suffix=" SOURCE"
-          >
-            {({ countUpRef }) => <span ref={countUpRef} />}
-          </CountUp>
-        </Text>
+        <Text w="max-content" px="1em" color="white" fontSize="md"></Text>
       </HStack>
     </HStack>
   )

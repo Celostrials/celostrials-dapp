@@ -7,7 +7,6 @@ import { useMemo } from "react"
 import CountUp from "react-countup"
 
 import { trimAddress } from "../../functions/address"
-import { formatBN } from "../../functions/bignumber"
 import { useAddress } from "../../hooks/useAccount"
 import { usePrevious } from "../../hooks/usePrevious"
 import { ConnectButton } from "./ConnectButton"

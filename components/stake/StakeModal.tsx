@@ -7,8 +7,6 @@ import {
 } from "@chakra-ui/react"
 import { memo } from "react"
 
-import { StakeBody } from "./StakeBody"
-
 interface StakeProps {
   isOpen: boolean
   onClose: () => void
@@ -23,9 +21,7 @@ export const StakeModal = memo(({ isOpen, onClose }: StakeProps) => {
       motionPreset="slideInRight"
     >
       <ModalOverlay bg="black.blur" backdropFilter="blur(10px)" />
-      <ModalContent>
-        <StakeBody />
-      </ModalContent>
+      <ModalContent></ModalContent>
     </Modal>
   )
 })
