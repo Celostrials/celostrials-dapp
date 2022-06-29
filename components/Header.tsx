@@ -174,12 +174,17 @@ export const Header = () => {
             <DrawerCloseButton />
 
             <VStack mt="3em" alignItems="flex-end" mr="1em">
-              <AccountButton
-                onOpen={() => {
+              <Stack
+                onClick={() => {
                   if (isMobile) onMobileClose()
-                  onOpen()
                 }}
-              />
+              >
+                <AccountButton
+                  onOpen={() => {
+                    onOpen()
+                  }}
+                />
+              </Stack>
               <Button
                 as={Link}
                 variant="link"
