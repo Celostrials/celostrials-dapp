@@ -9,7 +9,7 @@ function filledStyle(props: Dict) {
 
   const stripeStyle = mode(
     generateStripe(),
-    generateStripe("1rem", "rgba(0,0,0,0.1)")
+    generateStripe("1rem", "rgba(0,0,0,0.1)"),
   )(props)
 
   const bgColor = `${c}.main`
@@ -59,7 +59,7 @@ const baseStyle = (props: Dict) => ({
 
 const defaultProps = {
   size: "md",
-  colorScheme: "purple",
+  colorScheme: "orange",
 }
 
 export default {

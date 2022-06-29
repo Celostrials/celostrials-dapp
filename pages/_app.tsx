@@ -28,58 +28,46 @@ const Main = ({ Component, pageProps }: AppProps) => {
   }
 
   return (
-    <html className="tw-dark">
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
-      />
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
-      />
-      <ThemeProvider>
-        <CeloProvider
-          dapp={{
-            name: "Celostrials",
-            icon: "",
-            description:
-              "Undercollateralized Mutual Credit On The Celo Blockchain",
-            url: "https://celostrials.com",
-          }}
-          theme={{
-            primary: "white",
-            secondary: "#ff8802",
-            text: "white",
-            textSecondary: "rgba(255, 255, 255, 0.83)",
-            textTertiary: "rgba(255, 255, 255, 0.67)",
-            muted: "rgba(255, 255, 255, 0.33)",
-            background: "#181818",
-            error: "#F27D7D",
-          }}
-          connectModal={{
-            title: <span>Connect a wallet</span>,
-            providersOptions: {
-              searchable: false,
-            },
-            reactModalProps: {
-              overlayClassName: "ReactModal__Overlay_Celostrials",
-            },
-          }}
-          networks={[network]}
-          network={network}
-        >
-          <QueryClientProvider client={client}>
-            <Updater />
-            <Popups />
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </QueryClientProvider>
-        </CeloProvider>
-      </ThemeProvider>
-    </html>
+    <ThemeProvider>
+      <CeloProvider
+        dapp={{
+          name: "Celostrials",
+          icon: "",
+          description:
+            "Undercollateralized Mutual Credit On The Celo Blockchain",
+          url: "https://celostrials.com",
+        }}
+        theme={{
+          primary: "white",
+          secondary: "#ff8802",
+          text: "white",
+          textSecondary: "rgba(255, 255, 255, 0.83)",
+          textTertiary: "rgba(255, 255, 255, 0.67)",
+          muted: "rgba(255, 255, 255, 0.33)",
+          background: "#181818",
+          error: "#F27D7D",
+        }}
+        connectModal={{
+          title: <span>Connect a wallet</span>,
+          providersOptions: {
+            searchable: false,
+          },
+          reactModalProps: {
+            overlayClassName: "ReactModal__Overlay_Celostrials",
+          },
+        }}
+        networks={[network]}
+        network={network}
+      >
+        <QueryClientProvider client={client}>
+          <Updater />
+          <Popups />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </QueryClientProvider>
+      </CeloProvider>
+    </ThemeProvider>
   )
 }
 

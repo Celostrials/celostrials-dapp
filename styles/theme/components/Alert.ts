@@ -6,7 +6,7 @@ function variantLedger(props: Dict) {
   return {
     container: {
       borderRadius: "2xl",
-      bgColor: "purple.main",
+      bgColor: "orange.main",
       color: mode(`white`, `gray.900`)(props),
     },
   }

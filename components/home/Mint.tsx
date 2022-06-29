@@ -15,15 +15,12 @@ import { useState } from "react"
 
 import MintModal, { Token } from "./MintModal"
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faWallet } from "@fortawesome/free-solid-svg-icons"
-
 import { TotalMintedInfo } from "./TotalMinted"
 import { Button } from "@chakra-ui/button"
 import { useCelostrialsContract } from "../../hooks/useCelostrialsContract"
 import { getVMErrorMessage } from "../../functions/getVMErrorMessage"
 import { getTxEvents } from "../../functions/getTxEvent"
-import colors, { gradients } from "../../styles/theme/foundations/colors"
+import colors from "../../styles/theme/foundations/colors"
 import { useCelo } from "@celo/react-celo"
 import { ConnectButton } from "../account/ConnectButton"
 import { Center } from "@chakra-ui/react"
