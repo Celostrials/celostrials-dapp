@@ -34,7 +34,7 @@ export default function Document() {
         />
         <meta
           property="og:image"
-          content={config.HOST_URL + "/images/preview.jpeg"}
+          content={config.HOST_URL + "/images/preview.png"}
         />
         <meta property="twitter:title" content="Celostrials | nfETs on Celo" />
         <meta
@@ -43,16 +43,16 @@ export default function Document() {
         />
         <meta
           property="twitter:image"
-          content={config.HOST_URL + "/images/preview.jpeg"}
+          content={config.HOST_URL + "/images/preview.png"}
         />
         <meta property="twitter:card" content="Extraterrestrial NFTs on Celo" />
 
         <link
           rel="apple-touch-icon"
-          href={config.HOST_URL + "/images/preview.jpeg"}
+          href={config.HOST_URL + "/images/preview.png"}
         />
 
-        <link rel="manifest" href={config.HOST_URL + "/images/preview.jpeg"} />
+        <link rel="manifest" href={config.HOST_URL + "/images/preview.png"} />
       </Head>
       <body>
         <Main />
