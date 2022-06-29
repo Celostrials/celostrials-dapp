@@ -34,7 +34,7 @@ export const Header = () => {
     onClose: onMobileClose,
   } = useDisclosure()
 
-  const isMobile = useBreakpointValue({ base: true, md: false })
+  const isMobile = useBreakpointValue({ base: true, xl: false })
 
   const handleScroll = (id: string) => {
     onMobileClose()
