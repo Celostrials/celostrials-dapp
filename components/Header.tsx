@@ -74,6 +74,7 @@ export const Header = () => {
                 ml="0 !important"
                 mr="-1em !important"
                 size="lg"
+                color="white"
                 aria-label="menu"
                 variant="unstyled"
                 icon={<FontAwesomeIcon icon={faBars} />}
@@ -250,6 +251,7 @@ export const Socials = () => {
     <ButtonGroup ml="5em !important" spacing="-.5em">
       <Link target="_blank" href="https://twitter.com/celostrials">
         <IconButton
+          color="white"
           ml="0 !important"
           size="sm"
           aria-label="twitter"
@@ -260,6 +262,7 @@ export const Socials = () => {
       <Link target="_blank" href="https://www.instagram.com/celostrials/">
         <IconButton
           ml="0 !important"
+          color="white"
           size="sm"
           aria-label="twitter"
           variant="unstyled"
@@ -269,6 +272,7 @@ export const Socials = () => {
       <Link target="_blank" href="https://discord.com/invite/qgCWPrkWaW">
         <IconButton
           ml="0 !important"
+          color="white"
           size="sm"
           aria-label="twitter"
           variant="unstyled"
