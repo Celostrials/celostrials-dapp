@@ -149,6 +149,7 @@ const Mint = ({ myRef }: any) => {
             backgroundColor={"#525252"}
             borderColor={colors.gray.cement}
             marginBottom={"2em"}
+            marginX={{ md: "5em !important", base: "initial" }}
           >
             <Button background={colors.gray.cement} {...dec}>
               -
@@ -170,7 +171,6 @@ const Mint = ({ myRef }: any) => {
           {address ? (
             <Button
               minW="8em"
-              marginX={{ md: "10em !important", base: "initial" }}
               size="md"
               onClick={async () => await submitTx(mintAmount)}
               variant="solid"
