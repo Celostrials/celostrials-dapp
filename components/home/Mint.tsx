@@ -170,6 +170,7 @@ const Mint = ({ myRef }: any) => {
           {address ? (
             <Button
               minW="8em"
+              marginX={{ md: "10em !important", base: "initial" }}
               size="md"
               onClick={async () => await submitTx(mintAmount)}
               variant="solid"
