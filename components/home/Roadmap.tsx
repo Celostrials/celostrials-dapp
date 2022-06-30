@@ -5,7 +5,7 @@ import {
   VStack,
   Image,
   Text,
-  Link,
+  Spacer,
   HStack,
   Heading,
 } from "@chakra-ui/react"
@@ -190,8 +190,16 @@ const RoadmapItem = ({
         lineHeight="1em"
       >
         <span style={{ color: colors.orange.dark }}>
-          {" "}
-          _<br />
+          <span
+            style={{
+              marginLeft: "10px",
+              fontSize: "50px",
+              fontStyle: "initial",
+              lineHeight: "60px",
+            }}
+          >
+            _<br />
+          </span>
           {titleAccent}
         </span>
         {title}

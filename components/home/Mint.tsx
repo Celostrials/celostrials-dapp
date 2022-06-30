@@ -150,7 +150,6 @@ const Mint = ({ myRef }: any) => {
             backgroundColor={"#525252"}
             borderColor={colors.gray.cement}
             marginBottom={"2em"}
-            marginRight={!isMobile ? "2em" : "0em"}
           >
             <Button background={colors.gray.cement} {...dec}>
               -

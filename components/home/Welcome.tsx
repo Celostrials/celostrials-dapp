@@ -28,7 +28,7 @@ export const Welcome = () => {
             WELCOME TO THE INVASION
           </Heading>
           <Text fontSize="md">
-            Celosirials are an intergalactic collection of unique beings found
+            Celostrials are an intergalactic collection of unique beings found
             exclusively on the Celo blockchain. Their features are
             algorithmically generated, resulting in an interstellar collectible
             completely unique to you!
