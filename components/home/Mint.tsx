@@ -136,11 +136,10 @@ const Mint = ({ myRef }: any) => {
             mt="0 !important"
           />
         </HStack>
-        <HStack
+        <VStack
           borderRadius="1em"
           padding="2em"
           backgroundColor="#ffffff1f"
-          flexFlow="wrap"
           justifyContent={"center"}
         >
           <HStack
@@ -192,7 +191,7 @@ const Mint = ({ myRef }: any) => {
           ) : (
             <ConnectButton />
           )}
-        </HStack>
+        </VStack>
 
         <MintModal
           isOpen={mintModal.isOpen}
