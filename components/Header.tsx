@@ -241,6 +241,7 @@ export const Header = () => {
               >
                 FAQ
               </Button>
+              <Socials />
             </VStack>
           </DrawerContent>
         </Drawer>
