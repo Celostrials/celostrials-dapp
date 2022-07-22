@@ -108,6 +108,17 @@ export const Header = () => {
                         colorScheme="primary"
                         fontStyle="italic"
                         color="white"
+                        onClick={() => handleScroll("about")}
+                      >
+                        ABOUT
+                      </Button>
+                      <Button
+                        as={Link}
+                        variant="link"
+                        fontSize="small"
+                        colorScheme="primary"
+                        fontStyle="italic"
+                        color="white"
                         onClick={() => {
                           handleScroll("carbonize")
                         }}
@@ -125,19 +136,6 @@ export const Header = () => {
                       >
                         ROADMAP
                       </Button>
-
-                      <Button
-                        as={Link}
-                        variant="link"
-                        fontSize="small"
-                        colorScheme="primary"
-                        fontStyle="italic"
-                        color="white"
-                        onClick={() => handleScroll("about")}
-                      >
-                        ABOUT
-                      </Button>
-
                       <Button
                         as={Link}
                         fontSize="small"
