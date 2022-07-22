@@ -36,8 +36,8 @@ export default function Document() {
           property="og:image"
           content={config.HOST_URL + "/images/preview.png"}
         />
-        <meta property="og:image:width" content="3660" />
-        <meta property="og:image:height" content="2198" />
+        <meta property="og:image:width" content="2000" />
+        <meta property="og:image:height" content="1200" />
         <meta property="twitter:title" content="Celostrials | nfETs on Celo" />
         <meta
           property="twitter:description"
