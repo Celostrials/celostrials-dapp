@@ -30,22 +30,27 @@ export default function Document() {
         <meta property="og:type" content="NFTs" />
         <meta
           property="og:description"
-          content="Extraterrestrial NFTs on the Celo blockchain"
+          content="Celostrials are a collection of 10,000 uniquely generated aliens invading on the Celo Blockchain."
         />
         <meta
           property="og:image"
           content={config.HOST_URL + "/images/preview.png"}
         />
+        <meta property="og:image:width" content="3660" />
+        <meta property="og:image:height" content="2198" />
         <meta property="twitter:title" content="Celostrials | nfETs on Celo" />
         <meta
           property="twitter:description"
-          content="Extraterrestrial NFTs on Celo"
+          content="Celostrials are a collection of 10,000 uniquely generated aliens invading on the Celo Blockchain."
         />
         <meta
           property="twitter:image"
           content={config.HOST_URL + "/images/preview.png"}
         />
-        <meta property="twitter:card" content="Extraterrestrial NFTs on Celo" />
+        <meta
+          property="twitter:card"
+          content="Celostrials are a collection of 10,000 uniquely generated aliens invading on the Celo Blockchain."
+        />
 
         <link
           rel="apple-touch-icon"
