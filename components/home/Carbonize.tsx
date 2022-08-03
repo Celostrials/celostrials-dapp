@@ -12,8 +12,11 @@ import {
 } from "@chakra-ui/react"
 import { faCubes } from "@fortawesome/free-solid-svg-icons"
 import colors from "../../styles/theme/foundations/colors"
+import { useRouter } from "next/router"
 
 export const Carbonize = () => {
+  const router = useRouter()
+
   return (
     <Stack
       direction={{ md: "row", base: "column" }}
@@ -51,25 +54,23 @@ export const Carbonize = () => {
           my={{ md: "6em !important", base: "3em !important" }}
           alignSelf="center"
         >
-          {/* <Button
-            my="2em !important"
-            w={{ md: "initial", base: "20em" }}
-            variant="solid"
-            colorScheme="primary"
-            textDecoration="none !important"
-            rightIcon={<FontAwesomeIcon icon={faCubes} />}
+          <Link
+            onClick={() => router.push("/carbon")}
+            w={"15em"}
+            _active={{ boxShadow: "none" }}
+            _focus={{ boxShadow: "none" }}
           >
-            Carbonize
-          </Button> */}
-          <Heading
-            lineHeight="1em"
-            fontSize={{ md: "40px", base: "38px" }}
-            fontWeight="extrabold"
-            fontStyle="italic"
-            color={colors.orange.dark}
-          >
-            COMING SOON...
-          </Heading>
+            <Button
+              my="2em !important"
+              w={{ md: "initial", base: "20em" }}
+              variant="solid"
+              colorScheme="primary"
+              textDecoration="none !important"
+              rightIcon={<FontAwesomeIcon icon={faCubes} />}
+            >
+              Carbonize
+            </Button>
+          </Link>
         </Center>
       </VStack>
       <VStack minW="20em" alignSelf={{ md: "initial", base: "center" }}>

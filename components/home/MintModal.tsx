@@ -14,10 +14,11 @@ import {
 
 import Minted from "./Minted"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCircle } from "@fortawesome/free-solid-svg-icons"
+import { faCircle, faCubes } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react"
 import { gradients } from "../../styles/theme/foundations/colors"
 import Slider from "react-slick"
+import { Link } from "@chakra-ui/react"
 
 export interface Token {
   id: string
@@ -102,19 +103,18 @@ const MintModal = ({ isOpen, onClose, tokens, txHash }: MintModalProps) => {
               })}
             </Slider>
             <VStack>
-              <Button
-                size="lg"
-                w="100%"
-                maxWidth="20em !important"
-                mt="3em"
-                background={gradients.primary}
-                onClick={onClose}
-                leftIcon={
-                  <Image alt="alien" width="1.5em" src={"images/alien.svg"} />
-                }
-              >
-                Mint More
-              </Button>
+              <Link href="/carbon">
+                <Button
+                  size="lg"
+                  w="100%"
+                  maxWidth="20em !important"
+                  mt="3em"
+                  background={gradients.primary}
+                  leftIcon={<FontAwesomeIcon icon={faCubes} />}
+                >
+                  Carbonize
+                </Button>
+              </Link>
             </VStack>
           </ModalBody>
           <ModalFooter>

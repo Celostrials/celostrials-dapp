@@ -5,9 +5,9 @@
 import { Contract, Signer, utils } from "ethers";
 import { Provider } from "@ethersproject/providers";
 import type {
-  ERC721Burnable,
-  ERC721BurnableInterface,
-} from "../ERC721Burnable";
+  IERC721MetadataUpgradeable,
+  IERC721MetadataUpgradeableInterface,
+} from "../IERC721MetadataUpgradeable";
 
 const _abi = [
   {
@@ -115,7 +115,7 @@ const _abi = [
     outputs: [
       {
         internalType: "uint256",
-        name: "",
+        name: "balance",
         type: "uint256",
       },
     ],
@@ -130,24 +130,11 @@ const _abi = [
         type: "uint256",
       },
     ],
-    name: "burn",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256",
-      },
-    ],
     name: "getApproved",
     outputs: [
       {
         internalType: "address",
-        name: "",
+        name: "operator",
         type: "address",
       },
     ],
@@ -203,7 +190,7 @@ const _abi = [
     outputs: [
       {
         internalType: "address",
-        name: "",
+        name: "owner",
         type: "address",
       },
     ],
@@ -252,7 +239,7 @@ const _abi = [
       },
       {
         internalType: "bytes",
-        name: "_data",
+        name: "data",
         type: "bytes",
       },
     ],
@@ -270,7 +257,7 @@ const _abi = [
       },
       {
         internalType: "bool",
-        name: "approved",
+        name: "_approved",
         type: "bool",
       },
     ],
@@ -355,15 +342,19 @@ const _abi = [
   },
 ];
 
-export class ERC721Burnable__factory {
+export class IERC721MetadataUpgradeable__factory {
   static readonly abi = _abi;
-  static createInterface(): ERC721BurnableInterface {
-    return new utils.Interface(_abi) as ERC721BurnableInterface;
+  static createInterface(): IERC721MetadataUpgradeableInterface {
+    return new utils.Interface(_abi) as IERC721MetadataUpgradeableInterface;
   }
   static connect(
     address: string,
     signerOrProvider: Signer | Provider
-  ): ERC721Burnable {
-    return new Contract(address, _abi, signerOrProvider) as ERC721Burnable;
+  ): IERC721MetadataUpgradeable {
+    return new Contract(
+      address,
+      _abi,
+      signerOrProvider
+    ) as IERC721MetadataUpgradeable;
   }
 }

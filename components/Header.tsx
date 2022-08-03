@@ -28,6 +28,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons"
 
 export const Header = () => {
   const { isOpen, onClose, onOpen } = useDisclosure()
+  const router = useRouter()
   const {
     isOpen: isMobileOpen,
     onOpen: onMobileOpen,
@@ -37,6 +38,7 @@ export const Header = () => {
   const isMobile = useBreakpointValue({ base: true, xl: false })
 
   const handleScroll = (id: string) => {
+    if (router.pathname !== "/") router.push(`/#${id}`)
     onMobileClose()
     if (isMobile) {
       setTimeout(function () {

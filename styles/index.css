@@ -197,3 +197,42 @@ body {
     transform: rotateY(-15deg);
   }
 }
+
+.rainbow-box {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  border-radius: 2em;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+.rainbow-box:before {
+  height: 150% !important;
+  width: 150%;
+  position: inherit;
+  background: conic-gradient(
+    #fd004c,
+    #fe9000,
+    #fff020,
+    #3edf4b,
+    #3363ff,
+    #b102b7,
+    #fd004c
+  );
+  left: -25%;
+  top: -25%;
+  animation: spin 1.5s infinite linear;
+}
+@keyframes spin {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+.rainbow-box:after {
+  top: 3.5%;
+  left: 3.5%;
+  border-radius: 2em;
+}

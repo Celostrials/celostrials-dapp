@@ -1,6 +1,7 @@
 import { useTheme, useToken } from "@chakra-ui/react"
 import { useMemo, useState } from "react"
 import { SwitchSize } from "./Base"
+import colors from "../../../styles/theme/foundations/colors"
 
 type SwitchHandlers = {
   setOn: () => void
@@ -10,7 +11,7 @@ type SwitchHandlers = {
 }
 
 export const useSwitch = (
-  initialState: boolean = true
+  initialState: boolean = true,
 ): [boolean, SwitchHandlers] => {
   const [state, setState] = useState<boolean>(initialState)
 
@@ -29,7 +30,7 @@ export const useSwitch = (
         setState(initialState)
       },
     }),
-    [initialState]
+    [initialState],
   )
 
   return [state, handlers]
@@ -95,8 +96,6 @@ const dimensions: Record<SwitchSize, SwitchDimention> = {
 }
 
 export const useDimensions = (size: SwitchSize) => {
-  const [purple, gray] = useToken("colors", ["purple.main", "gray.40"])
-
   const theme = {
     dimension: () => dimensions[size],
     animation: {
@@ -104,8 +103,8 @@ export const useDimensions = (size: SwitchSize) => {
     },
     palette: {
       track: {
-        active: purple,
-        inActive: gray,
+        active: colors.primary.dark,
+        inActive: "#303032",
       },
       thumb: {
         background: "#ffffff",

@@ -25,26 +25,41 @@ interface CarbonizedCollectionInterface extends ethers.utils.Interface {
     "balanceOf(address)": FunctionFragment;
     "baseExtension()": FunctionFragment;
     "baseURI()": FunctionFragment;
-    "burn(uint256)": FunctionFragment;
+    "carbonBalance(address)": FunctionFragment;
+    "carbonCredit()": FunctionFragment;
+    "carbonDeposit(uint256)": FunctionFragment;
     "carbonize(uint256,uint256)": FunctionFragment;
     "carbonizeBatch(uint256[],uint256[])": FunctionFragment;
     "decarbonize(uint256)": FunctionFragment;
     "decarbonizeBatch(uint256[])": FunctionFragment;
+    "exists(uint256)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
+    "initialize(address,address,address,string,string)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
+    "maxCarbon()": FunctionFragment;
     "minCarbon()": FunctionFragment;
     "name()": FunctionFragment;
+    "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
+    "originalCollection()": FunctionFragment;
     "owner()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
     "paused()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
+    "rewards()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
+    "setMaxCarbon(uint256)": FunctionFragment;
+    "setMinCarbon(uint256)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
+    "tokenByIndex(uint256)": FunctionFragment;
+    "tokenOfOwnerByIndex(address,uint256)": FunctionFragment;
     "tokenURI(uint256)": FunctionFragment;
+    "totalCarbon()": FunctionFragment;
+    "totalSupply()": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
+    "walletOfOwner(address)": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -57,7 +72,18 @@ interface CarbonizedCollectionInterface extends ethers.utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "baseURI", values?: undefined): string;
-  encodeFunctionData(functionFragment: "burn", values: [BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "carbonBalance",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "carbonCredit",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "carbonDeposit",
+    values: [BigNumberish]
+  ): string;
   encodeFunctionData(
     functionFragment: "carbonize",
     values: [BigNumberish, BigNumberish]
@@ -75,15 +101,32 @@ interface CarbonizedCollectionInterface extends ethers.utils.Interface {
     values: [BigNumberish[]]
   ): string;
   encodeFunctionData(
+    functionFragment: "exists",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "getApproved",
     values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "initialize",
+    values: [string, string, string, string, string]
   ): string;
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
     values: [string, string]
   ): string;
+  encodeFunctionData(functionFragment: "maxCarbon", values?: undefined): string;
   encodeFunctionData(functionFragment: "minCarbon", values?: undefined): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "onERC721Received",
+    values: [string, string, BigNumberish, BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "originalCollection",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "ownerOf",
@@ -94,6 +137,7 @@ interface CarbonizedCollectionInterface extends ethers.utils.Interface {
     functionFragment: "renounceOwnership",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "rewards", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "safeTransferFrom",
     values: [string, string, BigNumberish]
@@ -103,13 +147,37 @@ interface CarbonizedCollectionInterface extends ethers.utils.Interface {
     values: [string, boolean]
   ): string;
   encodeFunctionData(
+    functionFragment: "setMaxCarbon",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setMinCarbon",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "supportsInterface",
     values: [BytesLike]
   ): string;
   encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "tokenByIndex",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "tokenOfOwnerByIndex",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "tokenURI",
     values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "totalCarbon",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "totalSupply",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "transferFrom",
@@ -117,6 +185,10 @@ interface CarbonizedCollectionInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "walletOfOwner",
     values: [string]
   ): string;
 
@@ -127,7 +199,18 @@ interface CarbonizedCollectionInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "baseURI", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "carbonBalance",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "carbonCredit",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "carbonDeposit",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "carbonize", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "carbonizeBatch",
@@ -141,16 +224,27 @@ interface CarbonizedCollectionInterface extends ethers.utils.Interface {
     functionFragment: "decarbonizeBatch",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "exists", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getApproved",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "isApprovedForAll",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "maxCarbon", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "minCarbon", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC721Received",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "originalCollection",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
@@ -158,6 +252,7 @@ interface CarbonizedCollectionInterface extends ethers.utils.Interface {
     functionFragment: "renounceOwnership",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "rewards", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "safeTransferFrom",
     data: BytesLike
@@ -167,11 +262,35 @@ interface CarbonizedCollectionInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "setMaxCarbon",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setMinCarbon",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "supportsInterface",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "tokenByIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "tokenOfOwnerByIndex",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "tokenURI", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "totalCarbon",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "totalSupply",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "transferFrom",
     data: BytesLike
@@ -180,10 +299,15 @@ interface CarbonizedCollectionInterface extends ethers.utils.Interface {
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "walletOfOwner",
+    data: BytesLike
+  ): Result;
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalForAll(address,address,bool)": EventFragment;
+    "Initialized(uint8)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "Paused(address)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
@@ -192,6 +316,7 @@ interface CarbonizedCollectionInterface extends ethers.utils.Interface {
 
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Initialized"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Paused"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
@@ -213,6 +338,8 @@ export type ApprovalForAllEvent = TypedEvent<
     approved: boolean;
   }
 >;
+
+export type InitializedEvent = TypedEvent<[number] & { version: number }>;
 
 export type OwnershipTransferredEvent = TypedEvent<
   [string, string] & { previousOwner: string; newOwner: string }
@@ -282,10 +409,17 @@ export class CarbonizedCollection extends BaseContract {
 
     baseURI(overrides?: CallOverrides): Promise<[string]>;
 
-    burn(
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    carbonBalance(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { carbon: BigNumber }>;
+
+    carbonCredit(overrides?: CallOverrides): Promise<[string]>;
+
+    carbonDeposit(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     carbonize(
       tokenId: BigNumberish,
@@ -309,10 +443,24 @@ export class CarbonizedCollection extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    exists(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     getApproved(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string]>;
+
+    initialize(
+      _originalCollection: string,
+      _carbonCredit: string,
+      _carbonRewards: string,
+      name: string,
+      symbol: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     isApprovedForAll(
       owner: string,
@@ -320,9 +468,21 @@ export class CarbonizedCollection extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
+    maxCarbon(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     minCarbon(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     name(overrides?: CallOverrides): Promise<[string]>;
+
+    onERC721Received(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      arg3: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    originalCollection(overrides?: CallOverrides): Promise<[string]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -336,6 +496,8 @@ export class CarbonizedCollection extends BaseContract {
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    rewards(overrides?: CallOverrides): Promise<[string]>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: string,
@@ -358,6 +520,16 @@ export class CarbonizedCollection extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    setMaxCarbon(
+      _maxCarbon: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    setMinCarbon(
+      _minCarbon: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -365,10 +537,25 @@ export class CarbonizedCollection extends BaseContract {
 
     symbol(overrides?: CallOverrides): Promise<[string]>;
 
+    tokenByIndex(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    tokenOfOwnerByIndex(
+      owner: string,
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     tokenURI(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string]>;
+
+    totalCarbon(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     transferFrom(
       from: string,
@@ -381,6 +568,11 @@ export class CarbonizedCollection extends BaseContract {
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    walletOfOwner(
+      _owner: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber[], BigNumber[]]>;
   };
 
   approve(
@@ -395,10 +587,14 @@ export class CarbonizedCollection extends BaseContract {
 
   baseURI(overrides?: CallOverrides): Promise<string>;
 
-  burn(
-    tokenId: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  carbonBalance(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+  carbonCredit(overrides?: CallOverrides): Promise<string>;
+
+  carbonDeposit(
+    arg0: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   carbonize(
     tokenId: BigNumberish,
@@ -422,10 +618,21 @@ export class CarbonizedCollection extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  exists(tokenId: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+
   getApproved(
     tokenId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
+
+  initialize(
+    _originalCollection: string,
+    _carbonCredit: string,
+    _carbonRewards: string,
+    name: string,
+    symbol: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   isApprovedForAll(
     owner: string,
@@ -433,9 +640,21 @@ export class CarbonizedCollection extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  maxCarbon(overrides?: CallOverrides): Promise<BigNumber>;
+
   minCarbon(overrides?: CallOverrides): Promise<BigNumber>;
 
   name(overrides?: CallOverrides): Promise<string>;
+
+  onERC721Received(
+    arg0: string,
+    arg1: string,
+    arg2: BigNumberish,
+    arg3: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  originalCollection(overrides?: CallOverrides): Promise<string>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -446,6 +665,8 @@ export class CarbonizedCollection extends BaseContract {
   renounceOwnership(
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
+
+  rewards(overrides?: CallOverrides): Promise<string>;
 
   "safeTransferFrom(address,address,uint256)"(
     from: string,
@@ -468,6 +689,16 @@ export class CarbonizedCollection extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  setMaxCarbon(
+    _maxCarbon: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  setMinCarbon(
+    _minCarbon: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   supportsInterface(
     interfaceId: BytesLike,
     overrides?: CallOverrides
@@ -475,7 +706,22 @@ export class CarbonizedCollection extends BaseContract {
 
   symbol(overrides?: CallOverrides): Promise<string>;
 
+  tokenByIndex(
+    index: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  tokenOfOwnerByIndex(
+    owner: string,
+    index: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   tokenURI(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+  totalCarbon(overrides?: CallOverrides): Promise<BigNumber>;
+
+  totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
   transferFrom(
     from: string,
@@ -488,6 +734,11 @@ export class CarbonizedCollection extends BaseContract {
     newOwner: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
+
+  walletOfOwner(
+    _owner: string,
+    overrides?: CallOverrides
+  ): Promise<[BigNumber[], BigNumber[]]>;
 
   callStatic: {
     approve(
@@ -502,7 +753,17 @@ export class CarbonizedCollection extends BaseContract {
 
     baseURI(overrides?: CallOverrides): Promise<string>;
 
-    burn(tokenId: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    carbonBalance(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    carbonCredit(overrides?: CallOverrides): Promise<string>;
+
+    carbonDeposit(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     carbonize(
       tokenId: BigNumberish,
@@ -526,10 +787,21 @@ export class CarbonizedCollection extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    exists(tokenId: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+
     getApproved(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    initialize(
+      _originalCollection: string,
+      _carbonCredit: string,
+      _carbonRewards: string,
+      name: string,
+      symbol: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     isApprovedForAll(
       owner: string,
@@ -537,9 +809,21 @@ export class CarbonizedCollection extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
+    maxCarbon(overrides?: CallOverrides): Promise<BigNumber>;
+
     minCarbon(overrides?: CallOverrides): Promise<BigNumber>;
 
     name(overrides?: CallOverrides): Promise<string>;
+
+    onERC721Received(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      arg3: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    originalCollection(overrides?: CallOverrides): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -548,6 +832,8 @@ export class CarbonizedCollection extends BaseContract {
     paused(overrides?: CallOverrides): Promise<boolean>;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
+
+    rewards(overrides?: CallOverrides): Promise<string>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: string,
@@ -570,6 +856,16 @@ export class CarbonizedCollection extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setMaxCarbon(
+      _maxCarbon: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setMinCarbon(
+      _minCarbon: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -577,7 +873,22 @@ export class CarbonizedCollection extends BaseContract {
 
     symbol(overrides?: CallOverrides): Promise<string>;
 
+    tokenByIndex(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    tokenOfOwnerByIndex(
+      owner: string,
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     tokenURI(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+    totalCarbon(overrides?: CallOverrides): Promise<BigNumber>;
+
+    totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferFrom(
       from: string,
@@ -590,6 +901,11 @@ export class CarbonizedCollection extends BaseContract {
       newOwner: string,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    walletOfOwner(
+      _owner: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber[], BigNumber[]]>;
   };
 
   filters: {
@@ -628,6 +944,14 @@ export class CarbonizedCollection extends BaseContract {
       [string, string, boolean],
       { owner: string; operator: string; approved: boolean }
     >;
+
+    "Initialized(uint8)"(
+      version?: null
+    ): TypedEventFilter<[number], { version: number }>;
+
+    Initialized(
+      version?: null
+    ): TypedEventFilter<[number], { version: number }>;
 
     "OwnershipTransferred(address,address)"(
       previousOwner?: string | null,
@@ -689,9 +1013,16 @@ export class CarbonizedCollection extends BaseContract {
 
     baseURI(overrides?: CallOverrides): Promise<BigNumber>;
 
-    burn(
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+    carbonBalance(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    carbonCredit(overrides?: CallOverrides): Promise<BigNumber>;
+
+    carbonDeposit(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     carbonize(
@@ -716,9 +1047,23 @@ export class CarbonizedCollection extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    exists(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getApproved(
       tokenId: BigNumberish,
       overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    initialize(
+      _originalCollection: string,
+      _carbonCredit: string,
+      _carbonRewards: string,
+      name: string,
+      symbol: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     isApprovedForAll(
@@ -727,9 +1072,21 @@ export class CarbonizedCollection extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    maxCarbon(overrides?: CallOverrides): Promise<BigNumber>;
+
     minCarbon(overrides?: CallOverrides): Promise<BigNumber>;
 
     name(overrides?: CallOverrides): Promise<BigNumber>;
+
+    onERC721Received(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      arg3: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    originalCollection(overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -743,6 +1100,8 @@ export class CarbonizedCollection extends BaseContract {
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    rewards(overrides?: CallOverrides): Promise<BigNumber>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: string,
@@ -765,6 +1124,16 @@ export class CarbonizedCollection extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    setMaxCarbon(
+      _maxCarbon: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    setMinCarbon(
+      _minCarbon: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -772,10 +1141,25 @@ export class CarbonizedCollection extends BaseContract {
 
     symbol(overrides?: CallOverrides): Promise<BigNumber>;
 
+    tokenByIndex(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    tokenOfOwnerByIndex(
+      owner: string,
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     tokenURI(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    totalCarbon(overrides?: CallOverrides): Promise<BigNumber>;
+
+    totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferFrom(
       from: string,
@@ -787,6 +1171,11 @@ export class CarbonizedCollection extends BaseContract {
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    walletOfOwner(
+      _owner: string,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
@@ -806,9 +1195,16 @@ export class CarbonizedCollection extends BaseContract {
 
     baseURI(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    burn(
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+    carbonBalance(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    carbonCredit(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    carbonDeposit(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     carbonize(
@@ -833,9 +1229,23 @@ export class CarbonizedCollection extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    exists(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     getApproved(
       tokenId: BigNumberish,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    initialize(
+      _originalCollection: string,
+      _carbonCredit: string,
+      _carbonRewards: string,
+      name: string,
+      symbol: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     isApprovedForAll(
@@ -844,9 +1254,23 @@ export class CarbonizedCollection extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    maxCarbon(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     minCarbon(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    onERC721Received(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      arg3: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    originalCollection(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -860,6 +1284,8 @@ export class CarbonizedCollection extends BaseContract {
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
+
+    rewards(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: string,
@@ -882,6 +1308,16 @@ export class CarbonizedCollection extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    setMaxCarbon(
+      _maxCarbon: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setMinCarbon(
+      _minCarbon: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -889,10 +1325,25 @@ export class CarbonizedCollection extends BaseContract {
 
     symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    tokenByIndex(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    tokenOfOwnerByIndex(
+      owner: string,
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     tokenURI(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    totalCarbon(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transferFrom(
       from: string,
@@ -904,6 +1355,11 @@ export class CarbonizedCollection extends BaseContract {
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    walletOfOwner(
+      _owner: string,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
 }

@@ -1,6 +1,10 @@
 import { BigNumber } from "@ethersproject/bignumber"
 
 import { config } from "./config"
+import { Celostrials__factory } from "../types/factories/Celostrials__factory"
+import { CarbonizedCollection__factory } from "../types/factories/CarbonizedCollection__factory"
+import { ERC20__factory } from "../types/factories/ERC20__factory"
+import { CarbonRewards__factory } from "../types/factories/CarbonRewards__factory"
 
 enum Chains {
   MAINNET = "MAINNET",
@@ -86,10 +90,34 @@ export const CHAIN_INFO = {
 export type Contract = { [key: string]: { address: string; abi: any } }
 
 export enum Contracts {
-  SOURCE = "SOURCE",
-  TOKEN_CLAIM = "TOKEN_CLAIM",
-  CREDIT_POOL = "CREDIT_POOL",
-  CREDIT_MANAGER = "CREDIT_MANAGER",
+  CELOSTRIALS = "CELOSTRIALS",
+  CARBONIZED = "CARBONIZED",
+  CARBON = "CARBON",
+  CELO = "CELO",
+  CARBON_REWARDS = "CARBON_REWARDS",
+}
+
+export const CONTRACTS: Contract = {
+  [Contracts.CELOSTRIALS]: {
+    address: config.CELOSTRIALS_ADDRESS,
+    abi: Celostrials__factory.abi,
+  },
+  [Contracts.CARBONIZED]: {
+    address: config.CARBONIZED_ADDRESS,
+    abi: CarbonizedCollection__factory.abi,
+  },
+  [Contracts.CARBON]: {
+    address: config.CARBON_ADDRESS,
+    abi: ERC20__factory.abi,
+  },
+  [Contracts.CELO]: {
+    address: config.CELO_ADDRESS,
+    abi: ERC20__factory.abi,
+  },
+  [Contracts.CARBON_REWARDS]: {
+    address: config.CARBON_REWARDS_ADDRESS,
+    abi: CarbonRewards__factory.abi,
+  },
 }
 
 export const MINIMUM_LIQUIDITY = BigNumber.from(1000)

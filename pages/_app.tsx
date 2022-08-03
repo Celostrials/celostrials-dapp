@@ -10,7 +10,6 @@ import { Layout } from "../layouts"
 import "../styles/index.css"
 import { ThemeProvider } from "../styles/theme"
 import { config } from "../config"
-import { Heading } from "@chakra-ui/react"
 
 const client = new QueryClient()
 

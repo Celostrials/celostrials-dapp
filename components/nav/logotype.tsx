@@ -9,7 +9,6 @@ const NavLogotypeButton = () => {
     <Link
       onClick={() => router.push("/")}
       w={"15em"}
-      href="/"
       _active={{ boxShadow: "none" }}
       _focus={{ boxShadow: "none" }}
     >

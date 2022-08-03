@@ -1,6 +1,7 @@
 import { Box, Center, Flex, useColorModeValue as mode } from "@chakra-ui/react"
 import { ReactNode } from "react"
 import { Header } from "../components"
+import { Footer } from "../components/Footer"
 
 export const Layout = ({ children }: { children?: ReactNode }) => (
   <>
@@ -8,7 +9,6 @@ export const Layout = ({ children }: { children?: ReactNode }) => (
     <div className="twinkling"></div>
     <Header />
     <Flex
-      // pt={"5em"}
       zIndex={1}
       alignItems="center"
       flexDirection="column"
@@ -17,5 +17,6 @@ export const Layout = ({ children }: { children?: ReactNode }) => (
     >
       {children}
     </Flex>
+    <Footer />
   </>
 )

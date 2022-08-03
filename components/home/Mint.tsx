@@ -12,23 +12,23 @@ import {
 } from "@chakra-ui/react"
 import { ethers } from "ethers"
 import { useState } from "react"
-
 import MintModal, { Token } from "./MintModal"
-
 import { TotalMintedInfo } from "./TotalMinted"
 import { Button } from "@chakra-ui/button"
-import { useCelostrialsContract } from "../../hooks/useCelostrialsContract"
 import { getVMErrorMessage } from "../../functions/getVMErrorMessage"
 import { getTxEvents } from "../../functions/getTxEvent"
 import colors from "../../styles/theme/foundations/colors"
 import { useCelo } from "@celo/react-celo"
 import { ConnectButton } from "../account/ConnectButton"
 import { Center } from "@chakra-ui/react"
+import { stringToEth } from "../../functions/bignumber"
+import { useMintCelostrials } from "../../hooks/useMintCelostrials"
 
 const Mint = ({ myRef }: any) => {
+  const { address } = useCelo()
   const [tokens, setTokens] = useState<Token[]>([])
   const [txHash, setTxHash] = useState("")
-  const { mint, getTotalSupply } = useCelostrialsContract()
+  const { onMint } = useMintCelostrials()
   const [loading, setLoading] = useState(false)
   const toast = useToast()
   const mintModal = useDisclosure()
@@ -48,37 +48,11 @@ const Mint = ({ myRef }: any) => {
 
   const submitTx = async (amount: number) => {
     setLoading(true)
-    let tx
-    try {
-      tx = await mint(amount)
-    } catch (e) {
-      setLoading(false)
-      console.log(e)
-      const error = e as any
-      if (error.message.includes("denied")) {
-        toast({
-          title: "Transaction Denied",
-          status: "error",
-        })
-      } else if (error.data) {
-        toast({
-          title: getVMErrorMessage(error.data.message),
-          status: "error",
-        })
-      } else {
-        toast({
-          title: "Mint Error",
-          description:
-            "Make sure you're connected to Celo and you have sufficient funds!",
-          status: "error",
-        })
-      }
-    }
-    if (!tx) {
+    const receipt = await onMint(amount)
+    if (!receipt) {
       setLoading(false)
       return
     }
-    const receipt = await tx.wait()
     const events = getTxEvents(receipt, "Transfer")
     const tokens = events.map((event: any) => getTokens(event, receipt))
     setLoading(false)
@@ -87,7 +61,6 @@ const Mint = ({ myRef }: any) => {
     mintModal.onOpen()
   }
 
-  const { connect, address } = useCelo()
   const [mintAmount, setMintAmount] = useState(1)
 
   const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =

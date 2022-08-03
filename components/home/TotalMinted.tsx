@@ -9,7 +9,8 @@ export const TotalMintedInfo = () => {
   const [maxSupply, setMaxSupply] = useState("1500")
   const [totalSupply, setTotalSupply] = useState("----")
 
-  const { getMaxSupply, getTotalSupply } = useCelostrialsContract()
+  const { totalSupply: getTotalSupply, maxSupply: getMaxSupply } =
+    useCelostrialsContract()
 
   const { connect, initialised, address } = useCelo()
 
