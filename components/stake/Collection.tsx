@@ -227,6 +227,7 @@ export const Collection = () => {
                             justifyContent="flex-start !important"
                             alignItems="flex-end !important"
                             mt="0em !important"
+                            // @ts-ignore
                             position="absolute !important"
                           >
                             <Image
