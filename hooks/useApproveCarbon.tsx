@@ -1,10 +1,8 @@
 import { useCelo, useConnectedSigner, WalletTypes } from "@celo/react-celo"
 import { useToast } from "@chakra-ui/react"
 import { BigNumber } from "@ethersproject/bignumber"
-import { Contract } from "@ethersproject/contracts"
-import { ethers } from "ethers"
 import { useCallback, useMemo } from "react"
-import { config, Contracts } from "../config"
+import { config } from "../config"
 import { nanoid } from "../functions"
 import { formatBN } from "../functions/bignumber"
 import { useToastControls } from "../state"
@@ -104,7 +102,7 @@ export const useApproveCarbon = (
           },
         })
       } else {
-        console.error(`Transaction failed`, e, "stake", formatBN(amount))
+        console.error(`Transaction failed`, e, "approve")
         console.log(`Transaction failed: ${(e as any).message}`)
 
         addToast({

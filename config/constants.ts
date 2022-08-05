@@ -5,6 +5,7 @@ import { Celostrials__factory } from "../types/factories/Celostrials__factory"
 import { CarbonizedCollection__factory } from "../types/factories/CarbonizedCollection__factory"
 import { ERC20__factory } from "../types/factories/ERC20__factory"
 import { CarbonRewards__factory } from "../types/factories/CarbonRewards__factory"
+import { MockCarbon__factory } from "../types/factories/MockCarbon__factory"
 
 enum Chains {
   MAINNET = "MAINNET",
@@ -108,7 +109,7 @@ export const CONTRACTS: Contract = {
   },
   [Contracts.CARBON]: {
     address: config.CARBON_ADDRESS,
-    abi: ERC20__factory.abi,
+    abi: MockCarbon__factory.abi,
   },
   [Contracts.CELO]: {
     address: config.CELO_ADDRESS,

@@ -1,6 +1,7 @@
 import { Signer } from "@ethersproject/abstract-signer"
 import { BaseContract } from "@ethersproject/contracts"
 import { Provider } from "@ethersproject/providers"
+import { MockCarbon__factory } from "../types/factories/MockCarbon__factory"
 import {
   CarbonRewards__factory,
   Celostrials__factory,
@@ -44,7 +45,7 @@ export const getCelostrialsContract = createContractGetter(Celostrials__factory)
 export const getCarbonizedContract = createContractGetter(
   CarbonizedCollection__factory,
 )
-export const getCarbonContract = createContractGetter(ERC20__factory)
+export const getCarbonContract = createContractGetter(MockCarbon__factory)
 export const getCeloContract = createContractGetter(ERC20__factory)
 export const getCarbonRewardsContract = createContractGetter(
   CarbonRewards__factory,

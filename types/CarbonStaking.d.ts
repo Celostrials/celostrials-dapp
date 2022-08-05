@@ -23,19 +23,14 @@ interface CarbonStakingInterface extends ethers.utils.Interface {
   functions: {
     "balanceOf(address)": FunctionFragment;
     "carbonCollection()": FunctionFragment;
-    "closeWhitelist()": FunctionFragment;
     "earned(address)": FunctionFragment;
     "exit()": FunctionFragment;
     "getReward()": FunctionFragment;
     "getRewardForDuration()": FunctionFragment;
     "initialize(address,address,address)": FunctionFragment;
-    "isWhitelist()": FunctionFragment;
     "lastTimeRewardApplicable()": FunctionFragment;
     "lastUpdateTime()": FunctionFragment;
     "notifyRewardAmount(uint256)": FunctionFragment;
-    "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
-    "onlyWhitelist()": FunctionFragment;
-    "openWhitelist()": FunctionFragment;
     "owner()": FunctionFragment;
     "paused()": FunctionFragment;
     "periodFinish()": FunctionFragment;
@@ -51,24 +46,16 @@ interface CarbonStakingInterface extends ethers.utils.Interface {
     "setRewardsDistribution(address)": FunctionFragment;
     "setRewardsDuration(uint256)": FunctionFragment;
     "stake(uint256)": FunctionFragment;
-    "stakeBatch(uint256[])": FunctionFragment;
     "totalSupply()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "updateActiveRewardsDuration(uint256)": FunctionFragment;
     "userRewardPerTokenPaid(address)": FunctionFragment;
-    "whiteList(address)": FunctionFragment;
-    "whiteListAccount(address)": FunctionFragment;
     "withdraw(uint256)": FunctionFragment;
-    "withdrawBatch(uint256[])": FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
   encodeFunctionData(
     functionFragment: "carbonCollection",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "closeWhitelist",
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "earned", values: [string]): string;
@@ -83,10 +70,6 @@ interface CarbonStakingInterface extends ethers.utils.Interface {
     values: [string, string, string]
   ): string;
   encodeFunctionData(
-    functionFragment: "isWhitelist",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "lastTimeRewardApplicable",
     values?: undefined
   ): string;
@@ -97,18 +80,6 @@ interface CarbonStakingInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "notifyRewardAmount",
     values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "onERC721Received",
-    values: [string, string, BigNumberish, BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "onlyWhitelist",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "openWhitelist",
-    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "paused", values?: undefined): string;
@@ -159,10 +130,6 @@ interface CarbonStakingInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "stake", values: [BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: "stakeBatch",
-    values: [BigNumberish[]]
-  ): string;
-  encodeFunctionData(
     functionFragment: "totalSupply",
     values?: undefined
   ): string;
@@ -178,27 +145,14 @@ interface CarbonStakingInterface extends ethers.utils.Interface {
     functionFragment: "userRewardPerTokenPaid",
     values: [string]
   ): string;
-  encodeFunctionData(functionFragment: "whiteList", values: [string]): string;
-  encodeFunctionData(
-    functionFragment: "whiteListAccount",
-    values: [string]
-  ): string;
   encodeFunctionData(
     functionFragment: "withdraw",
     values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "withdrawBatch",
-    values: [BigNumberish[]]
   ): string;
 
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "carbonCollection",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "closeWhitelist",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "earned", data: BytesLike): Result;
@@ -210,10 +164,6 @@ interface CarbonStakingInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "isWhitelist",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "lastTimeRewardApplicable",
     data: BytesLike
   ): Result;
@@ -223,18 +173,6 @@ interface CarbonStakingInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "notifyRewardAmount",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "onERC721Received",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "onlyWhitelist",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "openWhitelist",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -282,7 +220,6 @@ interface CarbonStakingInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "stake", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "stakeBatch", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "totalSupply",
     data: BytesLike
@@ -299,16 +236,7 @@ interface CarbonStakingInterface extends ethers.utils.Interface {
     functionFragment: "userRewardPerTokenPaid",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "whiteList", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "whiteListAccount",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "withdrawBatch",
-    data: BytesLike
-  ): Result;
 
   events: {
     "Initialized(uint8)": EventFragment;
@@ -415,10 +343,6 @@ export class CarbonStaking extends BaseContract {
 
     carbonCollection(overrides?: CallOverrides): Promise<[string]>;
 
-    closeWhitelist(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     earned(account: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
     exit(
@@ -438,28 +362,12 @@ export class CarbonStaking extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    isWhitelist(overrides?: CallOverrides): Promise<[boolean]>;
-
     lastTimeRewardApplicable(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     lastUpdateTime(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     notifyRewardAmount(
       reward: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    onERC721Received(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish,
-      arg3: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    onlyWhitelist(overrides?: CallOverrides): Promise<[boolean]>;
-
-    openWhitelist(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -508,11 +416,6 @@ export class CarbonStaking extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    stakeBatch(
-      tokenIds: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     transferOwnership(
@@ -530,20 +433,8 @@ export class CarbonStaking extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    whiteList(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
-
-    whiteListAccount(
-      account: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     withdraw(
       tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    withdrawBatch(
-      tokenIds: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
@@ -551,10 +442,6 @@ export class CarbonStaking extends BaseContract {
   balanceOf(account: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   carbonCollection(overrides?: CallOverrides): Promise<string>;
-
-  closeWhitelist(
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
 
   earned(account: string, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -575,28 +462,12 @@ export class CarbonStaking extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  isWhitelist(overrides?: CallOverrides): Promise<boolean>;
-
   lastTimeRewardApplicable(overrides?: CallOverrides): Promise<BigNumber>;
 
   lastUpdateTime(overrides?: CallOverrides): Promise<BigNumber>;
 
   notifyRewardAmount(
     reward: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  onERC721Received(
-    arg0: string,
-    arg1: string,
-    arg2: BigNumberish,
-    arg3: BytesLike,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  onlyWhitelist(overrides?: CallOverrides): Promise<boolean>;
-
-  openWhitelist(
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -645,11 +516,6 @@ export class CarbonStaking extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  stakeBatch(
-    tokenIds: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
   transferOwnership(
@@ -667,20 +533,8 @@ export class CarbonStaking extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  whiteList(arg0: string, overrides?: CallOverrides): Promise<boolean>;
-
-  whiteListAccount(
-    account: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   withdraw(
     tokenId: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  withdrawBatch(
-    tokenIds: BigNumberish[],
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -688,8 +542,6 @@ export class CarbonStaking extends BaseContract {
     balanceOf(account: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     carbonCollection(overrides?: CallOverrides): Promise<string>;
-
-    closeWhitelist(overrides?: CallOverrides): Promise<void>;
 
     earned(account: string, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -706,8 +558,6 @@ export class CarbonStaking extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    isWhitelist(overrides?: CallOverrides): Promise<boolean>;
-
     lastTimeRewardApplicable(overrides?: CallOverrides): Promise<BigNumber>;
 
     lastUpdateTime(overrides?: CallOverrides): Promise<BigNumber>;
@@ -716,18 +566,6 @@ export class CarbonStaking extends BaseContract {
       reward: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    onERC721Received(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish,
-      arg3: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    onlyWhitelist(overrides?: CallOverrides): Promise<boolean>;
-
-    openWhitelist(overrides?: CallOverrides): Promise<void>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -769,11 +607,6 @@ export class CarbonStaking extends BaseContract {
 
     stake(tokenId: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    stakeBatch(
-      tokenIds: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferOwnership(
@@ -791,16 +624,7 @@ export class CarbonStaking extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    whiteList(arg0: string, overrides?: CallOverrides): Promise<boolean>;
-
-    whiteListAccount(account: string, overrides?: CallOverrides): Promise<void>;
-
     withdraw(tokenId: BigNumberish, overrides?: CallOverrides): Promise<void>;
-
-    withdrawBatch(
-      tokenIds: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<void>;
   };
 
   filters: {
@@ -926,10 +750,6 @@ export class CarbonStaking extends BaseContract {
 
     carbonCollection(overrides?: CallOverrides): Promise<BigNumber>;
 
-    closeWhitelist(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     earned(account: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     exit(
@@ -949,28 +769,12 @@ export class CarbonStaking extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    isWhitelist(overrides?: CallOverrides): Promise<BigNumber>;
-
     lastTimeRewardApplicable(overrides?: CallOverrides): Promise<BigNumber>;
 
     lastUpdateTime(overrides?: CallOverrides): Promise<BigNumber>;
 
     notifyRewardAmount(
       reward: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    onERC721Received(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish,
-      arg3: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    onlyWhitelist(overrides?: CallOverrides): Promise<BigNumber>;
-
-    openWhitelist(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -1019,11 +823,6 @@ export class CarbonStaking extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    stakeBatch(
-      tokenIds: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferOwnership(
@@ -1041,20 +840,8 @@ export class CarbonStaking extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    whiteList(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
-
-    whiteListAccount(
-      account: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     withdraw(
       tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    withdrawBatch(
-      tokenIds: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
@@ -1066,10 +853,6 @@ export class CarbonStaking extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     carbonCollection(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    closeWhitelist(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
 
     earned(
       account: string,
@@ -1095,8 +878,6 @@ export class CarbonStaking extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    isWhitelist(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     lastTimeRewardApplicable(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1105,20 +886,6 @@ export class CarbonStaking extends BaseContract {
 
     notifyRewardAmount(
       reward: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    onERC721Received(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish,
-      arg3: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    onlyWhitelist(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    openWhitelist(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1174,11 +941,6 @@ export class CarbonStaking extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    stakeBatch(
-      tokenIds: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transferOwnership(
@@ -1196,23 +958,8 @@ export class CarbonStaking extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    whiteList(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    whiteListAccount(
-      account: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     withdraw(
       tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    withdrawBatch(
-      tokenIds: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

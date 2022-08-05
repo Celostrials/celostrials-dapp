@@ -9,9 +9,14 @@ import {
   ListItem,
 } from "@chakra-ui/react"
 import { useRouter } from "next/router"
+import { config } from "../../config"
+import { useMintCarbon } from "../../hooks/useMintCarbon"
+import { Button } from "@chakra-ui/button"
 
 export const CarbonizeInfo = () => {
   const router = useRouter()
+
+  const { onMintCarbon, loading } = useMintCarbon()
 
   return (
     <Stack
@@ -84,6 +89,19 @@ export const CarbonizeInfo = () => {
             that you can claim by clicking the {'"'}Rewards{'"'} button.
           </Text>
         </Text>
+        {config.NETWORK_NAME !== "celo" && (
+          <Button
+            w={{ md: "initial", base: "100%" }}
+            variant="outline"
+            colorScheme="primary"
+            onClick={async () => {
+              await onMintCarbon()
+            }}
+            isLoading={loading}
+          >
+            Mint Test Carbon
+          </Button>
+        )}
       </VStack>
       <VStack minW="20em" alignSelf={{ md: "initial", base: "center" }}>
         <Image
