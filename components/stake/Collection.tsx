@@ -255,7 +255,7 @@ export const Collection = () => {
                           ratio={1}
                           _hover={{ cursor: "pointer" }}
                           onClick={() => toggleSelected(id)}
-                          className={isSelected(id) ? "rainbow-box1" : ""}
+                          className={isSelected(id) ? "rainbow-box-border" : ""}
                           borderRadius={
                             isSelected(id) ? "40px !important" : "inherit"
                           }
@@ -302,20 +302,30 @@ export const Collection = () => {
               position="fixed"
               bottom="0 !important"
               p="1em !important"
-              w={{ md: "auto", base: "100%" }}
+              w="20em"
             >
-              <Stack className="rainbow-box1">
-                <Button
-                  _hover={{ backgroundColor: colors.orange }}
-                  w={{ md: "20em", base: "100%" }}
-                  size="lg"
-                  variant="solid"
-                  colorScheme="orange"
-                  rightIcon={<FontAwesomeIcon icon={faCubes} />}
+              <Stack>
+                <Stack
+                  _hover={{ cursor: "pointer" }}
                   onClick={onOpen}
+                  className="rainbow-box"
+                  height="3em"
+                  alignItems="center"
+                  justifyContent="center"
                 >
-                  {filter == "CARBONIZED" ? "Decarbonize" : "Carbonize"}
-                </Button>
+                  <HStack
+                    minW="18.1em"
+                    padding="19px 67px"
+                    borderRadius="20px"
+                    backdropFilter="blur(18px)"
+                    justifyContent="center"
+                  >
+                    <Text fontWeight="bold" fontSize="xl">
+                      {filter == "CARBONIZED" ? "Decarbonize " : "Carbonize "}
+                    </Text>
+                    <FontAwesomeIcon icon={faCubes} />
+                  </HStack>
+                </Stack>
               </Stack>
             </Box>
           </>

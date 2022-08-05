@@ -200,7 +200,7 @@ body {
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-.rainbow-box1 {
+.rainbow-box-border {
   border: double 0.5em transparent;
   border-radius: 1em;
   animation: 15s rotate linear infinite;
@@ -210,6 +210,22 @@ body {
   background-origin: border-box;
   background-clip: content-box, border-box;
   border-image-slice: 1 fill;
+}
+
+.rainbow-box {
+  --angle: 0deg;
+  /* This will work but yield a wrong result: */
+
+  border: double 2em transparent;
+  background-image: linear-gradient(white, white),
+    linear-gradient(var(--angle), red, yellow, lime, aqua, blue, magenta);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+
+  animation: 10s rotate linear infinite;
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  border-radius: 1em;
 }
 
 @property --angle {
