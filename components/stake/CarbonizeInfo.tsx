@@ -73,7 +73,7 @@ export const CarbonizeInfo = () => {
             </ListItem>
             <ListItem>
               Sign the {'"'}Approve Carbon{'"'} and {'"'}Approve Celostrials
-              {'"'} transactions
+              {'"'} transactions.
             </ListItem>
             <ListItem>
               Input a valid amount of NCT, and sign the carbonize transaction.
