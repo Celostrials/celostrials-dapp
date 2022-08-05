@@ -12,6 +12,7 @@ import { useRouter } from "next/router"
 import { config } from "../../config"
 import { useMintCarbon } from "../../hooks/useMintCarbon"
 import { Button } from "@chakra-ui/button"
+import colors from "../../styles/theme/foundations/colors"
 
 export const CarbonizeInfo = () => {
   const router = useRouter()
@@ -42,13 +43,17 @@ export const CarbonizeInfo = () => {
           alternative climate action.
         </Text>
         <Text pt="1em" fontSize="md">
-          <Text fontSize="md" fontStyle="italic">
+          <Text fontSize="xl" fontWeight="bold" fontStyle="italic">
             HOW TO:
           </Text>
           <OrderedList>
             <ListItem>
               Mint your very own Celostrial{" "}
-              <Link fontWeight="extrabold" onClick={() => router.push("/")}>
+              <Link
+                color={colors.orange.dark}
+                fontWeight="extrabold"
+                onClick={() => router.push("/")}
+              >
                 here
               </Link>
               .
@@ -59,6 +64,7 @@ export const CarbonizeInfo = () => {
                 fontWeight="extrabold"
                 href="https://app.uniswap.org/#/swap?chain=celo"
                 target="_blank"
+                color={colors.orange.dark}
               >
                 Uniswap
               </Link>{" "}
@@ -67,6 +73,7 @@ export const CarbonizeInfo = () => {
                 fontWeight="extrabold"
                 href="https://app.ubeswap.org/#/swap"
                 target="_blank"
+                color={colors.orange.dark}
               >
                 Ubeswap
               </Link>

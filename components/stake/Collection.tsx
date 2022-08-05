@@ -163,7 +163,7 @@ export const Collection = () => {
                     setSelected([])
                   }}
                   backgroundColor="transparent !important"
-                  w={{ md: "9em", base: "100%" }}
+                  w={{ md: "auto", base: "100%" }}
                 >
                   <option value="ALL">All</option>
                   <option value="UNCARBONIZED">Uncarbonized Items</option>
@@ -302,31 +302,19 @@ export const Collection = () => {
               position="fixed"
               bottom="0 !important"
               p="1em !important"
-              w="20em"
+              w="30em"
+              textAlign="center"
             >
-              <Stack>
-                <Stack
-                  _hover={{ cursor: "pointer" }}
-                  onClick={onOpen}
-                  className="rainbow-box"
-                  height="3em"
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  <HStack
-                    minW="18.1em"
-                    padding="19px 67px"
-                    borderRadius="20px"
-                    backdropFilter="blur(18px)"
-                    justifyContent="center"
-                  >
-                    <Text fontWeight="bold" fontSize="xl">
-                      {filter == "CARBONIZED" ? "Decarbonize " : "Carbonize "}
-                    </Text>
-                    <FontAwesomeIcon icon={faCubes} />
-                  </HStack>
-                </Stack>
-              </Stack>
+              <Button
+                w={{ md: "20em", base: "100%" }}
+                variant="solid"
+                size="lg"
+                colorScheme="primary"
+                rightIcon={<FontAwesomeIcon icon={faCubes} />}
+                onClick={onOpen}
+              >
+                {filter == "CARBONIZED" ? "Decarbonize " : "Carbonize "}
+              </Button>
             </Box>
           </>
         )}
