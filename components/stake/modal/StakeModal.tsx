@@ -13,10 +13,11 @@ interface StakeProps {
   onClose: () => void
   selected: string[]
   setSelected: (_selected: string[]) => void
+  openRewards: boolean
 }
 
 export const StakeModal = memo(
-  ({ isOpen, onClose, selected, setSelected }: StakeProps) => {
+  ({ isOpen, onClose, selected, setSelected, openRewards }: StakeProps) => {
     return (
       <Modal
         isOpen={isOpen}
@@ -26,7 +27,11 @@ export const StakeModal = memo(
       >
         <ModalOverlay bg="black.blur" backdropFilter="blur(10px)" />
         <ModalContent>
-          <StakeBody selected={selected} setSelected={setSelected} />
+          <StakeBody
+            selected={selected}
+            setSelected={setSelected}
+            openRewards={openRewards}
+          />
         </ModalContent>
       </Modal>
     )

@@ -9,11 +9,13 @@ export const StakeBody = memo(
   ({
     selected,
     setSelected,
+    openRewards,
   }: {
     selected: string[]
     setSelected: (_selected: string[]) => void
+    openRewards: boolean
   }) => {
-    const [tab, setTab] = useState(0)
+    const [tab, setTab] = useState(openRewards ? 1 : 0)
 
     const getTabTitle = () => {
       if (tab === 0) return "Add or Remove Carbon"
@@ -35,7 +37,10 @@ export const StakeBody = memo(
               </HStack>
             </Box>
           </CardHeader>
-          <StakeTabs onTabChange={(num) => setTab(num)} />
+          <StakeTabs
+            onTabChange={(num) => setTab(num)}
+            defaultTab={openRewards ? 1 : 0}
+          />
           <Box py={4}>
             <Divider />
           </Box>

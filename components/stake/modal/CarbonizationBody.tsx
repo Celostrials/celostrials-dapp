@@ -12,8 +12,6 @@ import {
   Image,
   Text,
   Checkbox,
-  NumberInput,
-  NumberInputField,
   usePrevious,
 } from "@chakra-ui/react"
 import { useSwitch } from "../switch"
@@ -25,7 +23,6 @@ import {
 import { useApproveCarbon } from "../../../hooks/useApproveCarbon"
 import { constants } from "ethers/lib/ethers"
 import { config } from "../../../config/config"
-import { useApproveCarbonized } from "../../../hooks/useApproveCarbonized"
 import { useCelo } from "@celo/react-celo"
 import { useIsMounted } from "../../../hooks/useIsMounted"
 import { useCarbonizedContract } from "../../../hooks/useCarbonizedContract"
@@ -48,6 +45,7 @@ import { useCarbonBalance } from "../../../hooks/useCarbonBalance"
 import { useMaxCarbon } from "../../../hooks/useMaxCarbon"
 import { useMinCarbon } from "../../../hooks/useMinCarbon"
 import { useCarbonize, useDecarbonize } from "../../../hooks/useManageCarbon"
+import colors from "../../../styles/theme/foundations/colors"
 
 interface Carbonized {
   id: string
@@ -76,14 +74,24 @@ export const CarbonizationBody = ({
   const minCarbon = parseFloat(formatBN(useMinCarbon()))
   const { onCarbonize, loading: carbonizing } = useCarbonize()
   const { onDecarbonize, loading: decarbonizing } = useDecarbonize()
-  const start = usePrevious(parseFloat(formatBN(carbonBalance)))
-  const end = parseFloat(formatBN(carbonBalance))
+  const startBalance = usePrevious(parseFloat(formatBN(carbonBalance)))
+  const endBalance = parseFloat(formatBN(carbonBalance))
 
   const isCarbonized = (id: string): boolean => {
     if (carbonized && carbonized.length > 0)
       return carbonized.some((carb) => carb.id === id)
     return false
   }
+
+  const getTotal = (): string => {
+    let total = 0
+    if (selected && selected.length > 0)
+      selected.map((carb) => (total += Number(carbon)))
+    return total.toFixed(2)
+  }
+
+  const startTotal = usePrevious(parseFloat(getTotal()))
+  const endTotal = parseFloat(getTotal())
 
   const [isCarbonizing, { toggle, setOff }] = useSwitch(true)
 
@@ -103,27 +111,21 @@ export const CarbonizationBody = ({
     carbon === "" || carbon === "." ? "0" : carbon,
   )
 
-  const carbonize = useCallback(async () => {
-    if (!parsedAmountBN || carbonizing) return
-    if (parsedAmountBN.isZero()) {
-      return
-    }
+  const carbonize = async () => {
+    if (!parsedAmountBN || parsedAmountBN.isZero() || carbonizing) return
     const tokenIds = selected.map((token) => Number(token))
     await onCarbonize(tokenIds, parsedAmountBN)
     setFetched(false)
     setSelected([])
-  }, [onCarbonize, parsedAmountBN, carbonizing])
+  }
 
-  const decarbonize = useCallback(async () => {
-    if (decarbonizing) return
-    if (selected.length < 1) {
-      return
-    }
+  const decarbonize = async () => {
+    if (decarbonizing || selected.length < 1) return
     const tokenIds = selected.map((token) => Number(token))
     await onDecarbonize(tokenIds)
     setFetched(false)
     setSelected([])
-  }, [onDecarbonize, decarbonizing])
+  }
 
   useEffect(() => {
     const loadBalance = async () => {
@@ -144,11 +146,11 @@ export const CarbonizationBody = ({
           }
         }),
       )
-
       setFetched(true)
     }
     if (!fetched) loadBalance()
   }, [
+    address,
     setUncarbonized,
     setCarbonized,
     carbonizing,
@@ -168,6 +170,10 @@ export const CarbonizationBody = ({
     }
     loadBalance()
   }, [exists])
+
+  useEffect(() => {
+    setFetched(false)
+  }, [address])
 
   const updateSelected = (id: string) => {
     if (selected && !isSelected(id)) {
@@ -212,7 +218,7 @@ export const CarbonizationBody = ({
         parsedAmountBN.gt(ethers.utils.parseEther(maxCarbon.toString()))
       }
       isLoading={carbonizing || decarbonizing}
-      loadingText="Approving"
+      loadingText={isCarbonizing ? "Carbonizing" : "Decarbonizing"}
     >
       {isCarbonizing ? "Carbonize" : "Decarbonize"}
     </Button>
@@ -292,7 +298,6 @@ export const CarbonizationBody = ({
                 />
                 <VStack>
                   <CurrencyInput onInput={(e) => setCarbon(e)} value={carbon} />
-                  {/* TODO: Total */}
                 </VStack>
               </HStack>
               <HStack
@@ -323,7 +328,7 @@ export const CarbonizationBody = ({
               display="flex"
               w="full"
               justifyContent="space-between"
-              p={4}
+              px={4}
             >
               <HStack>
                 <FontAwesomeIcon icon={faWallet} />
@@ -334,8 +339,8 @@ export const CarbonizationBody = ({
               <HStack>
                 <Text fontSize="sm" fontWeight="medium">
                   <CountUp
-                    start={start}
-                    end={end}
+                    start={startBalance}
+                    end={endBalance}
                     duration={0.2}
                     decimals={0}
                     delay={0}
@@ -350,9 +355,42 @@ export const CarbonizationBody = ({
             <Center w="100%" p={1} alignItems="center" mx={2}>
               <Divider />
             </Center>
+            <HStack
+              display="flex"
+              w="full"
+              justifyContent="space-between"
+              px={4}
+              pb={4}
+            >
+              <HStack>
+                <Text fontSize="md" color="#8F96AC">
+                  Total
+                </Text>
+              </HStack>
+              <HStack>
+                <Text fontSize="sm" fontWeight="medium">
+                  <CountUp
+                    start={startTotal}
+                    end={endTotal}
+                    duration={0.2}
+                    decimals={0}
+                    delay={0}
+                    separator=","
+                    suffix=" NCT"
+                  >
+                    {({ countUpRef }) => <span ref={countUpRef} />}
+                  </CountUp>
+                </Text>
+              </HStack>
+            </HStack>
           </VStack>
         )}
-        <HStack w="100%" maxH="20em" overflow="scroll">
+        <HStack
+          w="100%"
+          maxH="20em"
+          overflow="scroll"
+          backgroundColor={"#131313"}
+        >
           <TableContainer width="100%" alignSelf="flex-start">
             <Table variant="simple" p="1em">
               <Tbody>

@@ -4,15 +4,6 @@ import { useEffect, useState } from "react"
 import { ZERO } from "../config"
 import { useCarbonContract } from "./useCarbonContract"
 
-export interface Lock {
-  schedules: Schedule[]
-}
-
-export interface Schedule {
-  amount: ethers.BigNumber
-  expirationBlock: ethers.BigNumber
-}
-
 export const useCarbonBalance = (account?: string) => {
   const contract = useCarbonContract()
   const [data, setData] = useState(BigNumber.from(0))

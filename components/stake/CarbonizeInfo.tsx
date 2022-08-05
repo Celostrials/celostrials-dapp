@@ -1,4 +1,13 @@
-import { VStack, Stack, Image, Text, Link, Heading } from "@chakra-ui/react"
+import {
+  VStack,
+  Stack,
+  Image,
+  Text,
+  Link,
+  OrderedList,
+  Heading,
+  ListItem,
+} from "@chakra-ui/react"
 import { useRouter } from "next/router"
 
 export const CarbonizeInfo = () => {
@@ -23,20 +32,57 @@ export const CarbonizeInfo = () => {
           CARBONIZE YOUR CELOSTRIAL
         </Heading>
         <Text fontSize="md">
-          In partnership with Celo and Toucan, Celostrial holders are able to
-          carbonize their alien collection to earn climate activity rewards!
+          Greetings and welcome to the Celostrials Carbonizer. Here you will be
+          able to carbonize your collection and earn rewards for partaking in
+          alternative climate action.
         </Text>
-        <Text fontSize="md">
-          To learn more about the carbon extraction market and how you can take
-          action to fight climate change, head over to{" "}
-          <Link
-            fontWeight="extrabold"
-            href="https://toucan.earth/"
-            target="_blank"
-          >
-            toucan.earth
-          </Link>
-          .
+        <Text pt="1em" fontSize="md">
+          <Text fontSize="md" fontStyle="italic">
+            HOW TO:
+          </Text>
+          <OrderedList>
+            <ListItem>
+              Mint your very own Celostrial{" "}
+              <Link fontWeight="extrabold" onClick={() => router.push("/")}>
+                here
+              </Link>
+              .
+            </ListItem>
+            <ListItem>
+              Aquire some NCT carbon credits at{" "}
+              <Link
+                fontWeight="extrabold"
+                href="https://app.uniswap.org/#/swap?chain=celo"
+                target="_blank"
+              >
+                Uniswap
+              </Link>{" "}
+              or{" "}
+              <Link
+                fontWeight="extrabold"
+                href="https://app.ubeswap.org/#/swap"
+                target="_blank"
+              >
+                Ubeswap
+              </Link>
+              .
+            </ListItem>
+            <ListItem>
+              In the section bellow, select the aliens you wish to carbonize
+              then click the {'"'}carbonize{'"'} button.
+            </ListItem>
+            <ListItem>
+              Sign the {'"'}Approve Carbon{'"'} and {'"'}Approve Celostrials
+              {'"'} transactions
+            </ListItem>
+            <ListItem>
+              Input a valid amount of NCT, and sign the carbonize transaction.
+            </ListItem>
+          </OrderedList>
+          <Text pt="2em" fontSize="md">
+            All carbonized aliens automatically receive climate action rewards
+            that you can claim by clicking the {'"'}Rewards{'"'} button.
+          </Text>
         </Text>
       </VStack>
       <VStack minW="20em" alignSelf={{ md: "initial", base: "center" }}>

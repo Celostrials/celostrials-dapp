@@ -27,7 +27,6 @@ export const CarbonCards = () => {
           <HStack w="100%" mb="3em">
             <CarbonizeInfo />
           </HStack>
-          <Divider />
           <Collection />
         </Container>
       </VStack>

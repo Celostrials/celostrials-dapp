@@ -4,21 +4,19 @@ import { useEffect, useState } from "react"
 import { ZERO } from "../config"
 import { useCarbonRewardsContract } from "./useCarbonRewardsContract"
 
-export const useCarbonRewards = (account?: string) => {
+export const useCarbonRewardRate = () => {
   const contract = useCarbonRewardsContract()
   const [data, setData] = useState(BigNumber.from(0))
 
   useInterval(() => {
-    if (!account) return
-    const handler = async () => setData(await contract.earned(account))
+    const handler = async () => setData(await contract.rewardRate())
     handler()
   }, 5000)
 
   useEffect(() => {
-    if (!account) return
-    const handler = async () => setData(await contract.earned(account))
+    const handler = async () => setData(await contract.rewardRate())
     handler()
-  }, [account, contract])
+  }, [contract])
 
   return data ?? ZERO
 }

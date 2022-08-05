@@ -7,19 +7,25 @@ import {
   AspectRatio,
   useDisclosure,
   Select,
+  Text,
+  Box,
 } from "@chakra-ui/react"
 import { useCelostrialsContract } from "../../hooks/useCelostrialsContract"
 import { useState, useEffect } from "react"
 import { ethers } from "ethers"
 import { useCelo, useConnectedSigner } from "@celo/react-celo"
 import { ConnectButton } from "../account/ConnectButton"
-import { Spinner, Stack, HStack, Center } from "@chakra-ui/react"
+import { Spinner, Stack, HStack, Center, Divider } from "@chakra-ui/react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCubes } from "@fortawesome/free-solid-svg-icons"
+import { faCubes, faSackDollar } from "@fortawesome/free-solid-svg-icons"
 import { useCarbonizedContract } from "../../hooks/useCarbonizedContract"
 import { StakeModal } from "./modal/StakeModal"
 import { useRouter } from "next/router"
 import { ethToString, weiToString } from "../../functions/bignumber"
+import { useCarbonRewards } from "../../hooks/useCarbonRewards"
+import { useTotalCarbonized } from "../../hooks/useTotalCarbonized"
+import { useCalculateAPY } from "../../hooks/useCalculateAPY"
+import colors from "../../styles/theme/foundations/colors"
 
 interface Carbonized {
   id: string
@@ -29,10 +35,10 @@ interface Carbonized {
 export const Collection = () => {
   const url = "https://celostrials.s3.us-west-2.amazonaws.com/"
   const router = useRouter()
-
   const { walletOfOwner } = useCelostrialsContract()
   const { walletOfOwner: carbonWalletOfOwner } = useCarbonizedContract()
   const [fetched, setFetched] = useState(false)
+  const [openRewards, setOpenRewards] = useState(false)
   const [selected, setSelected] = useState<string[]>([])
   const [carbonized, setCarbonized] = useState<Carbonized[]>([])
   const [uncarbonized, setUncarbonized] = useState<string[]>([])
@@ -42,6 +48,10 @@ export const Collection = () => {
   const [loading, setLoading] = useState(false)
   const { address, initialised } = useCelo()
   const signer = useConnectedSigner()
+  const celoRewards = useCarbonRewards(address || "")
+  const totalCarbonized = weiToString(useTotalCarbonized())
+  // TODO: fix apy when NCT is live
+  const apy = useCalculateAPY()
 
   const isCarbonized = (id: string): boolean => {
     return carbonized.some((carb) => carb.id === id)
@@ -69,11 +79,17 @@ export const Collection = () => {
     return !!selected && selected.includes(id)
   }
 
+  const hasRewards = parseFloat(ethToString(celoRewards)) > 0
+
   const getTokens = (): string[] => {
     if (filter === "CARBONIZED") return carbonized.map((carb) => carb.id)
     if (filter === "UNCARBONIZED") return uncarbonized
     return [...carbonized.map((carb) => carb.id), ...uncarbonized]
   }
+
+  useEffect(() => {
+    if (!isOpen) setOpenRewards(false)
+  }, [isOpen])
 
   useEffect(() => {
     async function loadBalance() {
@@ -83,8 +99,7 @@ export const Collection = () => {
       setLoading(false)
       setFetched(true)
 
-      if (_carbonized && _carbonized[0].length > 0) {
-        console.log(_carbonized)
+      if (_carbonized) {
         setCarbonized(
           _carbonized[0].map((carb, index) => {
             return {
@@ -124,42 +139,75 @@ export const Collection = () => {
           <Spinner />
         ) : (
           <>
-            <HStack w="100%" mb="2em !important" justifyContent="space-between">
-              <Heading
-                lineHeight="1em"
-                fontSize="40px"
-                fontWeight="extrabold"
-                fontStyle="italic"
-                alignSelf="flex-start"
-              >
-                YOUR COLLECTION
-              </Heading>
-              <HStack>
+            <Stack
+              direction={{ md: "row", base: "column" }}
+              w="100%"
+              mb="2em !important"
+              justifyContent="space-between"
+            >
+              <VStack>
+                <Heading
+                  lineHeight="1em"
+                  fontSize="40px"
+                  fontWeight="extrabold"
+                  fontStyle="italic"
+                  alignSelf="flex-start"
+                >
+                  YOUR COLLECTION
+                </Heading>
                 <Select
+                  alignSelf="flex-start"
                   value={filter}
                   onChange={(e) => {
                     setFilter(e.target.value)
                     setSelected([])
                   }}
                   backgroundColor="transparent !important"
-                  w="9em"
+                  w={{ md: "9em", base: "100%" }}
                 >
                   <option value="ALL">All</option>
                   <option value="UNCARBONIZED">Uncarbonized Items</option>
                   <option value="CARBONIZED">Carbonized Items</option>
                 </Select>
-                <Button
-                  w={{ md: "initial", base: "20em" }}
-                  variant="solid"
-                  colorScheme="primary"
-                  rightIcon={<FontAwesomeIcon icon={faCubes} />}
-                  disabled={selected?.length == 0}
-                  onClick={onOpen}
+              </VStack>
+              <VStack
+                alignItems="flex-end"
+                flexDir={{ md: "column", base: "column-reverse" }}
+              >
+                <HStack
+                  color={colors.orange.dark}
+                  width={{ md: "initial", base: "100%" }}
+                  mt={{ md: "initial", base: "1em" }}
+                  justifyContent={{ md: "initial", base: "center" }}
                 >
-                  {filter == "CARBONIZED" ? "Manage" : "Carbonize"}
-                </Button>
-              </HStack>
-            </HStack>
+                  <Text fontSize="md">Total Carbonized: {totalCarbonized}</Text>
+                  <Divider
+                    borderColor={colors.orange.dark}
+                    opacity="1"
+                    borderLeftWidth="2px"
+                    h="1em"
+                    orientation="vertical"
+                  />
+                  <Text fontSize="md" marginRight="5px">
+                    APY: {apy}%
+                  </Text>
+                </HStack>
+                {hasRewards && (
+                  <Button
+                    w={{ md: "initial", base: "100%" }}
+                    variant="outline"
+                    colorScheme="primary"
+                    rightIcon={<FontAwesomeIcon icon={faSackDollar} />}
+                    onClick={() => {
+                      setOpenRewards(true)
+                      onOpen()
+                    }}
+                  >
+                    Rewards
+                  </Button>
+                )}
+              </VStack>
+            </Stack>
             {address && (
               <>
                 {getTokens().length === 0 && (
@@ -207,12 +255,14 @@ export const Collection = () => {
                           ratio={1}
                           _hover={{ cursor: "pointer" }}
                           onClick={() => toggleSelected(id)}
-                          className={isSelected(id) ? "rainbow-box" : ""}
+                          className={isSelected(id) ? "rainbow-box1" : ""}
+                          borderRadius={
+                            isSelected(id) ? "40px !important" : "inherit"
+                          }
                         >
                           <>
                             <Image
                               draggable={false}
-                              padding={isSelected(id) ? "10px" : ""}
                               userSelect="none"
                               src={`${url}${id}.png`}
                               objectFit="cover"
@@ -247,6 +297,26 @@ export const Collection = () => {
               </>
             )}
             {!address && <ConnectButton />}
+            <Box
+              display={selected?.length == 0 ? "none" : "initial"}
+              position="fixed"
+              bottom="0 !important"
+              p="1em !important"
+              w={{ md: "auto", base: "100%" }}
+            >
+              <Stack>
+                <Button
+                  w={{ md: "20em", base: "100%" }}
+                  size="lg"
+                  variant="solid"
+                  colorScheme="primary"
+                  rightIcon={<FontAwesomeIcon icon={faCubes} />}
+                  onClick={onOpen}
+                >
+                  {filter == "CARBONIZED" ? "Decarbonize" : "Carbonize"}
+                </Button>
+              </Stack>
+            </Box>
           </>
         )}
       </VStack>
@@ -255,6 +325,7 @@ export const Collection = () => {
         setSelected={setSelected}
         isOpen={isOpen}
         onClose={onClose}
+        openRewards={openRewards}
       />
     </>
   )

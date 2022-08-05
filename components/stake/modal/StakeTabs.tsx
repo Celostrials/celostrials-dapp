@@ -11,7 +11,13 @@ import {
 } from "@chakra-ui/react"
 import colors from "../../../styles/theme/foundations/colors"
 
-export const StakeTabs = ({ onTabChange }: { onTabChange: (num) => void }) => {
+export const StakeTabs = ({
+  onTabChange,
+  defaultTab,
+}: {
+  onTabChange: (num) => void
+  defaultTab: number
+}) => {
   const TabButton = forwardRef((props, ref) => {
     const tabProps = useTab({ ...props, ref })
     const isSelected = !!tabProps["aria-selected"]
@@ -40,7 +46,7 @@ export const StakeTabs = ({ onTabChange }: { onTabChange: (num) => void }) => {
   return (
     <Tabs
       isLazy
-      defaultIndex={0}
+      defaultIndex={defaultTab}
       onChange={onTabChange}
       variant="unstyled"
       w="full"

@@ -104,7 +104,6 @@ export const useDecarbonize = () => {
           })
         const resp = await (carbonizeContract &&
           carbonizeContract.decarbonizeBatch(tokenIds))
-
         addTransaction(resp, {
           summary: `Decarbonize ${tokenIds.length} Item${
             tokenIds.length > 1 ? "s" : ""

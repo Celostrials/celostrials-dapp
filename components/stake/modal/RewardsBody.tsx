@@ -40,11 +40,10 @@ export const RewardsBody = memo(() => {
           <HStack pt="2">
             <Box>
               <Image
-                filter="drop-shadow(3px -2px 0 white) drop-shadow(-3px -2px 0 white) drop-shadow(0px 3px 0 white)"
                 alignSelf="center"
                 alt="NCT.png"
                 src="/images/NCT.png"
-                w="2em"
+                w="1em"
               />
             </Box>
             <Box as="span" fontSize="md">

@@ -4,21 +4,19 @@ import { useEffect, useState } from "react"
 import { ZERO } from "../config"
 import { useCarbonizedContract } from "./useCarbonizedContract"
 
-export const useCarbonizedBalance = (account?: string) => {
+export const useTotalCarbonized = () => {
   const contract = useCarbonizedContract()
   const [data, setData] = useState(BigNumber.from(0))
 
   useInterval(() => {
-    if (!account) return
-    const handler = async () => setData(await contract.carbonBalance(account))
+    const handler = async () => setData(await contract.totalSupply())
     handler()
   }, 5000)
 
   useEffect(() => {
-    if (!account) return
-    const handler = async () => setData(await contract.carbonBalance(account))
+    const handler = async () => setData(await contract.totalSupply())
     handler()
-  }, [account, contract])
+  }, [contract])
 
   return data ?? ZERO
 }
