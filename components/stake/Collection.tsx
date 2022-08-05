@@ -304,12 +304,13 @@ export const Collection = () => {
               p="1em !important"
               w={{ md: "auto", base: "100%" }}
             >
-              <Stack>
+              <Stack className="rainbow-box1">
                 <Button
+                  _hover={{ backgroundColor: colors.orange }}
                   w={{ md: "20em", base: "100%" }}
                   size="lg"
                   variant="solid"
-                  colorScheme="primary"
+                  colorScheme="orange"
                   rightIcon={<FontAwesomeIcon icon={faCubes} />}
                   onClick={onOpen}
                 >
