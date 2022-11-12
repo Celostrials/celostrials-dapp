@@ -13,7 +13,6 @@ import {
   VStack,
   DrawerCloseButton,
 } from "@chakra-ui/react"
-import { useRouter } from "next/router"
 import { AccountButton, AccountModal } from "./account"
 import NavLogotypeButton from "./nav/logotype"
 import { ButtonGroup, Container } from "@chakra-ui/react"
@@ -23,6 +22,7 @@ import {
   faDiscord,
   faInstagram,
   faTwitter,
+  faGithub,
 } from "@fortawesome/free-brands-svg-icons"
 import { faBars } from "@fortawesome/free-solid-svg-icons"
 
@@ -281,6 +281,16 @@ export const Socials = () => {
           aria-label="twitter"
           variant="unstyled"
           icon={<FontAwesomeIcon icon={faDiscord} />}
+        />
+      </Link>
+      <Link target="_blank" href="https://github.com/Celostrials">
+        <IconButton
+          ml="0 !important"
+          color="white"
+          size="sm"
+          aria-label="github"
+          variant="unstyled"
+          icon={<FontAwesomeIcon icon={faGithub} />}
         />
       </Link>
     </ButtonGroup>
