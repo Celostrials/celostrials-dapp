@@ -6,9 +6,7 @@ import { useMemo } from "react"
 
 import { CONTRACTS, Contracts } from "../config"
 import {
-  getCarbonContract,
-  getCarbonizedContract,
-  getCarbonRewardsContract,
+  getCarbonizedCollectionContract,
   getCelostrialsContract,
 } from "../functions/contracts"
 
@@ -29,19 +27,8 @@ export function getContract(
       break
     }
     case Contracts.CARBONIZED: {
-      contract = getCarbonizedContract(
+      contract = getCarbonizedCollectionContract(
         CONTRACTS[Contracts.CARBONIZED].address,
-        signer,
-      )
-      break
-    }
-    case Contracts.CARBON: {
-      contract = getCarbonContract(CONTRACTS[Contracts.CARBON].address, signer)
-      break
-    }
-    case Contracts.CARBON_REWARDS: {
-      contract = getCarbonRewardsContract(
-        CONTRACTS[Contracts.CARBON_REWARDS].address,
         signer,
       )
       break

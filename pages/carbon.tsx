@@ -1,7 +1,7 @@
 import { Container, Flex, Heading, VStack, Button } from "@chakra-ui/react"
 import type { NextPage } from "next"
 import Head from "next/head"
-import { CarbonCards } from "../components/stake/index"
+import { CarbonCards } from "../components/carbonize/index"
 
 export const Carbon: NextPage = () => {
   return (

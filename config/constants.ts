@@ -1,11 +1,8 @@
 import { BigNumber } from "@ethersproject/bignumber"
 
 import { config } from "./config"
-import { Celostrials__factory } from "../types/factories/Celostrials__factory"
 import { CarbonizedCollection__factory } from "../types/factories/CarbonizedCollection__factory"
-import { ERC20__factory } from "../types/factories/ERC20__factory"
-import { CarbonRewards__factory } from "../types/factories/CarbonRewards__factory"
-import { MockCarbon__factory } from "../types/factories/MockCarbon__factory"
+import { Celostrials__factory } from "../types/factories/Celostrials__factory"
 
 enum Chains {
   MAINNET = "MAINNET",
@@ -93,9 +90,6 @@ export type Contract = { [key: string]: { address: string; abi: any } }
 export enum Contracts {
   CELOSTRIALS = "CELOSTRIALS",
   CARBONIZED = "CARBONIZED",
-  CARBON = "CARBON",
-  CELO = "CELO",
-  CARBON_REWARDS = "CARBON_REWARDS",
 }
 
 export const CONTRACTS: Contract = {
@@ -106,18 +100,6 @@ export const CONTRACTS: Contract = {
   [Contracts.CARBONIZED]: {
     address: config.CARBONIZED_ADDRESS,
     abi: CarbonizedCollection__factory.abi,
-  },
-  [Contracts.CARBON]: {
-    address: config.CARBON_ADDRESS,
-    abi: MockCarbon__factory.abi,
-  },
-  [Contracts.CELO]: {
-    address: config.CELO_ADDRESS,
-    abi: ERC20__factory.abi,
-  },
-  [Contracts.CARBON_REWARDS]: {
-    address: config.CARBON_REWARDS_ADDRESS,
-    abi: CarbonRewards__factory.abi,
   },
 }
 

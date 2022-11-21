@@ -1,13 +1,10 @@
 import { Signer } from "@ethersproject/abstract-signer"
 import { BaseContract } from "@ethersproject/contracts"
 import { Provider } from "@ethersproject/providers"
-import { MockCarbon__factory } from "../types/factories/MockCarbon__factory"
-import {
-  CarbonRewards__factory,
-  Celostrials__factory,
-  CarbonizedCollection__factory,
-  ERC20__factory,
-} from "../types"
+import { CarbonizedCollection__factory, Carbonizer } from "../types"
+import { Celostrials__factory } from "../types/factories/Celostrials__factory"
+import { Celostrials } from "../types/Celostrials"
+import { Carbonizer__factory } from "../types/factories/Carbonizer__factory"
 
 export interface Factory<C extends BaseContract> {
   connect(address: string, signerOrProvider: Signer | Provider): C
@@ -42,11 +39,13 @@ export const createContractGetter = <C extends BaseContract>(
 }
 
 export const getCelostrialsContract = createContractGetter(Celostrials__factory)
-export const getCarbonizedContract = createContractGetter(
+export const getCarbonizedCollectionContract = createContractGetter(
   CarbonizedCollection__factory,
 )
-export const getCarbonContract = createContractGetter(MockCarbon__factory)
-export const getCeloContract = createContractGetter(ERC20__factory)
-export const getCarbonRewardsContract = createContractGetter(
-  CarbonRewards__factory,
-)
+
+export const getCarbonizerContract = async (
+  address: string,
+  signer: Signer | Provider,
+): Promise<Carbonizer> => {
+  return Carbonizer__factory.connect(address, signer)
+}

@@ -12,9 +12,6 @@ import { useAddress } from "./useAccount"
 import { useAllowanceCelostrials } from "./useAllowanceCelostrials"
 
 import { useMountedState } from "./useMountedState"
-import { config } from "../config/config"
-import { Celostrials__factory } from "../types/factories/Celostrials__factory"
-import { Celostrials } from "../types"
 import { useCelostrialsContract } from "./useCelostrialsContract"
 
 export type UseApproveResponse = {

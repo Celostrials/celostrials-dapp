@@ -7,7 +7,7 @@ import { config, Contracts, ZERO } from "../config"
 import { useAddress } from "./useAccount"
 import { useDebounceCallback } from "./useDebounceCallback"
 import { useConnectedSigner } from "@celo/react-celo"
-import { Celostrials__factory } from "../types"
+import { Celostrials__factory } from "../types/factories/Celostrials__factory"
 import { Celostrials } from "../types/Celostrials"
 
 export type UseAllowanceResponse = {
