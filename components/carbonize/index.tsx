@@ -10,7 +10,7 @@ import dynamic from "next/dynamic"
 import { CarbonizedGraph } from "./CarbonizedGraph"
 import { Collection } from "./Collection"
 
-const Chart = dynamic(
+const Chart = dynamic<any>(
   () => import("./CarbonizedGraph").then((mod) => mod.CarbonizedGraph),
   {
     ssr: false,
