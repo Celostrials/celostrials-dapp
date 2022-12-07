@@ -47,21 +47,19 @@ export const DecarbonizationBody = ({ tokenId }: { tokenId: string }) => {
     withdrawalAmount,
   } = useDecarbonize(tokenId)
 
-  useEffect(() => {
-    const handler = async () => {
-      if (!signer) return
-      const carbonizer = Carbonizer__factory.connect(
-        await carbonizedCollection.carbonizer(Number(tokenId)),
-        signer,
-      )
-      const yieldVal = Number(formatEther(await carbonizer.getYield()))
-      setCarbonRetired(
-        yieldVal >= 1 ? yieldVal.toFixed(2) : yieldVal.toFixed(8),
-      )
-      setDeposit(Number(formatEther(await carbonizer.getDeposit())))
-    }
+  const fetchData = async () => {
+    if (!signer) return
+    const carbonizer = Carbonizer__factory.connect(
+      await carbonizedCollection.carbonizer(Number(tokenId)),
+      signer,
+    )
+    const yieldVal = Number(formatEther(await carbonizer.getYield()))
+    setCarbonRetired(yieldVal >= 1 ? yieldVal.toFixed(2) : yieldVal.toFixed(8))
+    setDeposit(Number(formatEther(await carbonizer.getDeposit())))
+  }
 
-    if (carbonizedCollection) handler()
+  useEffect(() => {
+    if (carbonizedCollection) fetchData()
   }, [carbonizedCollection, signer])
 
   useEffect(() => {
@@ -83,6 +81,7 @@ export const DecarbonizationBody = ({ tokenId }: { tokenId: string }) => {
       borderColor={"white"}
       onClick={async () => {
         await decarbonize(tokenId)
+        await fetchData()
       }}
       isLoading={decarbonizeState === DecarbonizeState.UNKNOWN || decarbonizing}
       loadingText={"Decarbonizing"}
@@ -117,7 +116,10 @@ export const DecarbonizationBody = ({ tokenId }: { tokenId: string }) => {
         variant="outline"
         color="white"
         borderColor={"white"}
-        onClick={async () => withdraw(tokenId)}
+        onClick={async () => {
+          await withdraw(tokenId)
+          await fetchData()
+        }}
         isLoading={withdrawing}
         loadingText="Withdrawing"
       >
@@ -219,7 +221,9 @@ export const DecarbonizationBody = ({ tokenId }: { tokenId: string }) => {
               if (!isCarbonizing) return setIsCarbonizing(true)
               setIsCarbonizing(false)
               await carbonize(Number(tokenId), Number(celo))
+              await fetchData()
             }}
+            isDisabled={decarbonizeState === DecarbonizeState.DECARBONIZING}
             isLoading={
               decarbonizeState === DecarbonizeState.UNKNOWN || carbonizing
             }

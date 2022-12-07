@@ -108,7 +108,7 @@ const MintModal = ({ isOpen, onClose, tokens, txHash }: MintModalProps) => {
                   size="lg"
                   w="100%"
                   maxWidth="20em !important"
-                  mt="3em"
+                  mt="1em"
                   background={gradients.primary}
                   leftIcon={<FontAwesomeIcon icon={faCubes} />}
                 >

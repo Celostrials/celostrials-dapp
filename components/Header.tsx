@@ -114,19 +114,23 @@ export const Header = () => {
                       >
                         ABOUT
                       </Button>
-                      <Button
-                        as={Link}
-                        variant="link"
-                        fontSize="small"
-                        colorScheme="primary"
-                        fontStyle="italic"
-                        color="white"
-                        onClick={() => {
-                          handleScroll("carbonize")
-                        }}
+                      <Link
+                        textDecoration={"none !important"}
+                        onClick={() => router.push("/carbon")}
+                        _active={{ boxShadow: "none" }}
+                        _focus={{ boxShadow: "none" }}
                       >
-                        CARBONIZE
-                      </Button>
+                        <Button
+                          as={Link}
+                          variant="link"
+                          fontSize="small"
+                          colorScheme="primary"
+                          fontStyle="italic"
+                          color="white"
+                        >
+                          CARBONIZE
+                        </Button>
+                      </Link>
                       <Button
                         as={Link}
                         variant="link"

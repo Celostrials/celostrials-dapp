@@ -114,7 +114,7 @@ export const Collection = () => {
                   fontStyle="italic"
                   alignSelf="flex-start"
                 >
-                  YOUR COLLECTION
+                  CARBONIZE YOUR COLLECTION
                 </Heading>
                 <Select
                   alignSelf="flex-start"
@@ -212,17 +212,7 @@ export const Collection = () => {
                             mt="0em !important"
                             // @ts-ignore
                             position="absolute !important"
-                          >
-                            <Image
-                              filter="drop-shadow(5px -3px 0 white) drop-shadow(-5px -3px 0 white) drop-shadow(0px 6px 0 white)"
-                              alignSelf="center"
-                              alt="NCT.png"
-                              src="/images/NCT.png"
-                              w="5em"
-                              mt="-1em"
-                              ml="-1em"
-                            />
-                          </Stack>
+                          ></Stack>
                         )}
                       </Stack>
                     ))}

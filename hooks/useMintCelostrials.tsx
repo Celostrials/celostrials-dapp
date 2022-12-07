@@ -31,11 +31,13 @@ export const useMintCelostrials = () => {
             status: "info",
           })
 
+        const cost = await celostrials.cost()
+
         const gas = await celostrials.estimateGas.mint(address, amount, {
-          value: stringToEth("3").mul(amount),
+          value: cost.mul(amount),
         })
         const resp = await celostrials.mint(address, amount, {
-          value: stringToEth("3").mul(amount),
+          value: cost.mul(amount),
           gasLimit: gas.mul(10),
         })
 
