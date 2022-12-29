@@ -23,7 +23,7 @@ import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 interface CarbonizerInterface extends ethers.utils.Interface {
   functions: {
     "carbonizedCollection()": FunctionFragment;
-    "claim()": FunctionFragment;
+    "claim(address)": FunctionFragment;
     "deposit()": FunctionFragment;
     "gTokenVault()": FunctionFragment;
     "getDeposit()": FunctionFragment;
@@ -39,7 +39,7 @@ interface CarbonizerInterface extends ethers.utils.Interface {
     functionFragment: "carbonizedCollection",
     values?: undefined
   ): string;
-  encodeFunctionData(functionFragment: "claim", values?: undefined): string;
+  encodeFunctionData(functionFragment: "claim", values: [string]): string;
   encodeFunctionData(functionFragment: "deposit", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "gTokenVault",
@@ -147,6 +147,7 @@ export class Carbonizer extends BaseContract {
     carbonizedCollection(overrides?: CallOverrides): Promise<[string]>;
 
     claim(
+      _receiver: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -185,6 +186,7 @@ export class Carbonizer extends BaseContract {
   carbonizedCollection(overrides?: CallOverrides): Promise<string>;
 
   claim(
+    _receiver: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -222,7 +224,7 @@ export class Carbonizer extends BaseContract {
   callStatic: {
     carbonizedCollection(overrides?: CallOverrides): Promise<string>;
 
-    claim(overrides?: CallOverrides): Promise<void>;
+    claim(_receiver: string, overrides?: CallOverrides): Promise<void>;
 
     deposit(overrides?: CallOverrides): Promise<void>;
 
@@ -272,6 +274,7 @@ export class Carbonizer extends BaseContract {
     carbonizedCollection(overrides?: CallOverrides): Promise<BigNumber>;
 
     claim(
+      _receiver: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -309,6 +312,7 @@ export class Carbonizer extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     claim(
+      _receiver: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

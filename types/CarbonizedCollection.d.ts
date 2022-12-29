@@ -32,6 +32,8 @@ interface CarbonizedCollectionInterface extends ethers.utils.Interface {
     "deployer()": FunctionFragment;
     "exists(uint256)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
+    "getDeposit(uint256)": FunctionFragment;
+    "getYield(uint256)": FunctionFragment;
     "initialize(address,address,string,string,string)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "name()": FunctionFragment;
@@ -52,6 +54,7 @@ interface CarbonizedCollectionInterface extends ethers.utils.Interface {
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "walletOfOwner(address)": FunctionFragment;
+    "withdrawls(uint256)": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -83,6 +86,14 @@ interface CarbonizedCollectionInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getApproved",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getDeposit",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getYield",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
@@ -156,6 +167,10 @@ interface CarbonizedCollectionInterface extends ethers.utils.Interface {
     functionFragment: "walletOfOwner",
     values: [string]
   ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawls",
+    values: [BigNumberish]
+  ): string;
 
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
@@ -176,6 +191,8 @@ interface CarbonizedCollectionInterface extends ethers.utils.Interface {
     functionFragment: "getApproved",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "getDeposit", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getYield", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "isApprovedForAll",
@@ -238,12 +255,15 @@ interface CarbonizedCollectionInterface extends ethers.utils.Interface {
     functionFragment: "walletOfOwner",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "withdrawls", data: BytesLike): Result;
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalForAll(address,address,bool)": EventFragment;
     "Initialized(uint8)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
+    "TokenIdCarbonized(address,uint256,uint256)": EventFragment;
+    "TokenIdDecarbonized(address,uint256)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
 
@@ -251,6 +271,8 @@ interface CarbonizedCollectionInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Initialized"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "TokenIdCarbonized"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "TokenIdDecarbonized"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
 
@@ -274,6 +296,18 @@ export type InitializedEvent = TypedEvent<[number] & { version: number }>;
 
 export type OwnershipTransferredEvent = TypedEvent<
   [string, string] & { previousOwner: string; newOwner: string }
+>;
+
+export type TokenIdCarbonizedEvent = TypedEvent<
+  [string, BigNumber, BigNumber] & {
+    carbonizer: string;
+    tokenId: BigNumber;
+    amount: BigNumber;
+  }
+>;
+
+export type TokenIdDecarbonizedEvent = TypedEvent<
+  [string, BigNumber] & { carbonizer: string; tokenId: BigNumber }
 >;
 
 export type TransferEvent = TypedEvent<
@@ -362,6 +396,16 @@ export class CarbonizedCollection extends BaseContract {
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string]>;
+
+    getDeposit(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    getYield(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     initialize(
       _originalCollection: string,
@@ -468,6 +512,13 @@ export class CarbonizedCollection extends BaseContract {
       _owner: string,
       overrides?: CallOverrides
     ): Promise<[BigNumber[], string[]]>;
+
+    withdrawls(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { value: BigNumber; timestamp: BigNumber }
+    >;
   };
 
   approve(
@@ -502,6 +553,16 @@ export class CarbonizedCollection extends BaseContract {
     tokenId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
+
+  getDeposit(
+    tokenId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  getYield(
+    tokenId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   initialize(
     _originalCollection: string,
@@ -603,6 +664,13 @@ export class CarbonizedCollection extends BaseContract {
     overrides?: CallOverrides
   ): Promise<[BigNumber[], string[]]>;
 
+  withdrawls(
+    tokenId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber] & { value: BigNumber; timestamp: BigNumber }
+  >;
+
   callStatic: {
     approve(
       to: string,
@@ -633,6 +701,16 @@ export class CarbonizedCollection extends BaseContract {
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    getDeposit(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getYield(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     initialize(
       _originalCollection: string,
@@ -731,6 +809,13 @@ export class CarbonizedCollection extends BaseContract {
       _owner: string,
       overrides?: CallOverrides
     ): Promise<[BigNumber[], string[]]>;
+
+    withdrawls(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { value: BigNumber; timestamp: BigNumber }
+    >;
   };
 
   filters: {
@@ -794,6 +879,40 @@ export class CarbonizedCollection extends BaseContract {
       { previousOwner: string; newOwner: string }
     >;
 
+    "TokenIdCarbonized(address,uint256,uint256)"(
+      carbonizer?: null,
+      tokenId?: null,
+      amount?: null
+    ): TypedEventFilter<
+      [string, BigNumber, BigNumber],
+      { carbonizer: string; tokenId: BigNumber; amount: BigNumber }
+    >;
+
+    TokenIdCarbonized(
+      carbonizer?: null,
+      tokenId?: null,
+      amount?: null
+    ): TypedEventFilter<
+      [string, BigNumber, BigNumber],
+      { carbonizer: string; tokenId: BigNumber; amount: BigNumber }
+    >;
+
+    "TokenIdDecarbonized(address,uint256)"(
+      carbonizer?: null,
+      tokenId?: null
+    ): TypedEventFilter<
+      [string, BigNumber],
+      { carbonizer: string; tokenId: BigNumber }
+    >;
+
+    TokenIdDecarbonized(
+      carbonizer?: null,
+      tokenId?: null
+    ): TypedEventFilter<
+      [string, BigNumber],
+      { carbonizer: string; tokenId: BigNumber }
+    >;
+
     "Transfer(address,address,uint256)"(
       from?: string | null,
       to?: string | null,
@@ -849,6 +968,16 @@ export class CarbonizedCollection extends BaseContract {
     ): Promise<BigNumber>;
 
     getApproved(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getDeposit(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getYield(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -958,6 +1087,11 @@ export class CarbonizedCollection extends BaseContract {
       _owner: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    withdrawls(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -999,6 +1133,16 @@ export class CarbonizedCollection extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     getApproved(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getDeposit(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getYield(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1108,6 +1252,11 @@ export class CarbonizedCollection extends BaseContract {
 
     walletOfOwner(
       _owner: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    withdrawls(
+      tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

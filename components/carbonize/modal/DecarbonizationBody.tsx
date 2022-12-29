@@ -23,7 +23,13 @@ import { formatEther } from "ethers/lib/utils"
 import { CurrencyInput } from "../input"
 import { useCarbonize } from "../../../hooks/useCarbonize"
 
-export const DecarbonizationBody = ({ tokenId }: { tokenId: string }) => {
+export const DecarbonizationBody = ({
+  tokenId,
+  onClose,
+}: {
+  tokenId: string
+  onClose: () => void
+}) => {
   const url = "https://celostrials.s3.us-west-2.amazonaws.com/"
   const isMounted = useIsMounted()
   const { address, getConnectedKit } = useCelo()
@@ -119,6 +125,7 @@ export const DecarbonizationBody = ({ tokenId }: { tokenId: string }) => {
         onClick={async () => {
           await withdraw(tokenId)
           await fetchData()
+          await onClose()
         }}
         isLoading={withdrawing}
         loadingText="Withdrawing"

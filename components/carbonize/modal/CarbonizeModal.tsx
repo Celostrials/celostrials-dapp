@@ -47,7 +47,7 @@ export const CarbonizeModal = memo(
               <ModalHeader alignSelf={"center"} color="white">
                 #{tokenId}
               </ModalHeader>
-              <DecarbonizationBody tokenId={tokenId} />
+              <DecarbonizationBody tokenId={tokenId} onClose={onClose} />
             </>
           )}
         </ModalContent>

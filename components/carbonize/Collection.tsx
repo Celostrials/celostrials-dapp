@@ -16,8 +16,6 @@ import { ethers } from "ethers"
 import { useCelo, useConnectedSigner } from "@celo/react-celo"
 import { ConnectButton } from "../account/ConnectButton"
 import { Spinner, Stack, HStack, Center, Divider } from "@chakra-ui/react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCubes } from "@fortawesome/free-solid-svg-icons"
 import { useCarbonizedContract } from "../../hooks/useCarbonizedContract"
 import { CarbonizeModal } from "./modal/CarbonizeModal"
 import { useRouter } from "next/router"
@@ -52,9 +50,10 @@ export const Collection = () => {
 
   useEffect(() => {
     async function loadBalance() {
+      if (!address) return
       setLoading(true)
-      const _uncarbonized = await walletOfOwner(address || "")
-      const _carbonized = await carbonWalletOfOwner(address || "")
+      const _uncarbonized = await walletOfOwner(address)
+      const _carbonized = await carbonWalletOfOwner(address)
       setLoading(false)
       setFetched(true)
 
@@ -70,7 +69,7 @@ export const Collection = () => {
           _uncarbonized.map((id) => ethers.utils.formatUnits(id, "wei")),
         )
     }
-    if (initialised && !fetched) loadBalance()
+    if (initialised && address && !fetched) loadBalance()
   }, [initialised, address, walletOfOwner, carbonWalletOfOwner, fetched])
 
   useEffect(() => {

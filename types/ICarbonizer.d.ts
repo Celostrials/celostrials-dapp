@@ -22,18 +22,33 @@ import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface ICarbonizerInterface extends ethers.utils.Interface {
   functions: {
-    "claim()": FunctionFragment;
+    "claim(address)": FunctionFragment;
     "deposit()": FunctionFragment;
+    "getDeposit()": FunctionFragment;
+    "getYield()": FunctionFragment;
     "withdraw()": FunctionFragment;
+    "withdrawls()": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: "claim", values?: undefined): string;
+  encodeFunctionData(functionFragment: "claim", values: [string]): string;
   encodeFunctionData(functionFragment: "deposit", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "getDeposit",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "getYield", values?: undefined): string;
   encodeFunctionData(functionFragment: "withdraw", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "withdrawls",
+    values?: undefined
+  ): string;
 
   decodeFunctionResult(functionFragment: "claim", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getDeposit", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getYield", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "withdrawls", data: BytesLike): Result;
 
   events: {};
 }
@@ -83,6 +98,7 @@ export class ICarbonizer extends BaseContract {
 
   functions: {
     claim(
+      _receiver: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -90,12 +106,23 @@ export class ICarbonizer extends BaseContract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    getDeposit(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    getYield(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     withdraw(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    withdrawls(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { value: BigNumber; timestamp: BigNumber }
+    >;
   };
 
   claim(
+    _receiver: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -103,22 +130,43 @@ export class ICarbonizer extends BaseContract {
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  getDeposit(overrides?: CallOverrides): Promise<BigNumber>;
+
+  getYield(overrides?: CallOverrides): Promise<BigNumber>;
+
   withdraw(
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  withdrawls(
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber] & { value: BigNumber; timestamp: BigNumber }
+  >;
+
   callStatic: {
-    claim(overrides?: CallOverrides): Promise<void>;
+    claim(_receiver: string, overrides?: CallOverrides): Promise<void>;
 
     deposit(overrides?: CallOverrides): Promise<void>;
 
+    getDeposit(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getYield(overrides?: CallOverrides): Promise<BigNumber>;
+
     withdraw(overrides?: CallOverrides): Promise<void>;
+
+    withdrawls(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { value: BigNumber; timestamp: BigNumber }
+    >;
   };
 
   filters: {};
 
   estimateGas: {
     claim(
+      _receiver: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -126,13 +174,20 @@ export class ICarbonizer extends BaseContract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    getDeposit(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getYield(overrides?: CallOverrides): Promise<BigNumber>;
+
     withdraw(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    withdrawls(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
     claim(
+      _receiver: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -140,8 +195,14 @@ export class ICarbonizer extends BaseContract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    getDeposit(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    getYield(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     withdraw(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
+
+    withdrawls(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }
