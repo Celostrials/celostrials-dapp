@@ -1,4 +1,4 @@
-import { Center, Button } from "@chakra-ui/react"
+import { Center, Button, Icon as ChakraIcon } from "@chakra-ui/react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   Box,
@@ -12,8 +12,11 @@ import {
 } from "@chakra-ui/react"
 import { faCubes } from "@fortawesome/free-solid-svg-icons"
 import colors from "../../styles/theme/foundations/colors"
+import { useRouter } from "next/router"
 
 export const Carbonize = () => {
+  const router = useRouter()
+
   return (
     <Stack
       direction={{ md: "row", base: "column" }}
@@ -22,7 +25,7 @@ export const Carbonize = () => {
       pt="4"
       justifyContent="space-between"
     >
-      <VStack alignItems="flex-start" maxW="35em">
+      <VStack alignItems="flex-start" maxW={{ md: "35em", base: "100%" }}>
         <Heading
           lineHeight="1em"
           fontSize="40px"
@@ -32,8 +35,11 @@ export const Carbonize = () => {
           CARBONIZE YOUR CELOSTRIAL
         </Heading>
         <Text fontSize="md">
-          In partnership with Celo and Toucan, Celostrial holders are able to
-          carbonize their alien collection to earn climate activity rewards!
+          Celostrial holders are able to carbonize their collection by staking
+          Celo onto each of their NFTs. The more Celo staked, the more carbon is
+          removed from the atmosphere. Carbonized NFTs then compete in carbon
+          competitions for climate activity rewards that are given at random to
+          the top Carbonizers in a given period.
         </Text>
         <Text fontSize="md">
           To learn more about the carbon extraction market and how you can take
@@ -51,16 +57,6 @@ export const Carbonize = () => {
           my={{ md: "6em !important", base: "3em !important" }}
           alignSelf="center"
         >
-          {/* <Button
-            my="2em !important"
-            w={{ md: "initial", base: "20em" }}
-            variant="solid"
-            colorScheme="primary"
-            textDecoration="none !important"
-            rightIcon={<FontAwesomeIcon icon={faCubes} />}
-          >
-            Carbonize
-          </Button> */}
           <Heading
             lineHeight="1em"
             fontSize={{ md: "40px", base: "38px" }}
