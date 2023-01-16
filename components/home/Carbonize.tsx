@@ -78,7 +78,7 @@ export const Carbonize = () => {
       </VStack>
       <VStack minW="20em" alignSelf={{ md: "initial", base: "center" }}>
         <Image
-          src={"images/Carbonized.gif"}
+          src={"images/carbonized_preview.gif"}
           borderRadius="1em"
           maxW="21em"
           alt={"alien1"}
