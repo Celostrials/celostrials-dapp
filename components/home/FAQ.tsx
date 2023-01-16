@@ -67,6 +67,58 @@ export const FAQ = () => {
         <AccordionItem>
           <AccordionButton justifyContent="space-between">
             <Text fontSize="md" color="white" textAlign={"left"}>
+              What is a Carbonized NFT?
+            </Text>
+            <AccordionIcon color="white" />
+          </AccordionButton>
+          <AccordionPanel pb={4}>
+            <Text color="white" textAlign={"left"}>
+              A carbonized NFT is an NFT that has Celo staked onto it in order
+              to accrue yields that are used to retire carbon credits. The more
+              Celo and the longer it is staked, the more carbon that is offset.
+            </Text>
+          </AccordionPanel>
+        </AccordionItem>
+
+        <AccordionItem>
+          <AccordionButton justifyContent="space-between">
+            <Text fontSize="md" color="white" textAlign={"left"}>
+              Why Carbonize?
+            </Text>
+            <AccordionIcon color="white" />
+          </AccordionButton>
+          <AccordionPanel pb={4}>
+            <Text color="white" textAlign={"left"}>
+              Interacting with the carbon market incentivises individuals and
+              entities to offset their carbon footprint which points the word
+              towards being more climate conscious in a time of severe climate
+              change. The Celostrials Carbon Collection aims to make interacting
+              with the carbon market more fun, by creating an easy way to
+              compete with other Celostrial holders in Carbon Competitions.
+            </Text>
+          </AccordionPanel>
+        </AccordionItem>
+
+        <AccordionItem>
+          <AccordionButton justifyContent="space-between">
+            <Text fontSize="md" color="white" textAlign={"left"}>
+              What are Carbon Competitions?
+            </Text>
+            <AccordionIcon color="white" />
+          </AccordionButton>
+          <AccordionPanel pb={4}>
+            <Text color="white" textAlign={"left"}>
+              The Celostrials community will be hosting carbon competitions
+              where carbonizers will be competing over a timespan to see who can
+              offset the most carbon. The top carbonizers will then be entered
+              in community raffles with Celo prizes.
+            </Text>
+          </AccordionPanel>
+        </AccordionItem>
+
+        <AccordionItem>
+          <AccordionButton justifyContent="space-between">
+            <Text fontSize="md" color="white" textAlign={"left"}>
               What is the minting price?
             </Text>
             <AccordionIcon color="white" />

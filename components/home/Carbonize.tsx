@@ -50,6 +50,14 @@ export const Carbonize = () => {
             target="_blank"
           >
             toucan.earth
+          </Link>{" "}
+          and{" "}
+          <Link
+            fontWeight="extrabold"
+            href="https://www.spirals.so/"
+            target="_blank"
+          >
+            spirals.so
           </Link>
           .
         </Text>
@@ -64,13 +72,13 @@ export const Carbonize = () => {
             fontStyle="italic"
             color={colors.orange.dark}
           >
-            COMING SOON...
+            COMING JANUARY 18TH ...
           </Heading>
         </Center>
       </VStack>
       <VStack minW="20em" alignSelf={{ md: "initial", base: "center" }}>
         <Image
-          src={"images/carbonized2.gif"}
+          src={"images/Carbonized.gif"}
           borderRadius="1em"
           maxW="21em"
           alt={"alien1"}
