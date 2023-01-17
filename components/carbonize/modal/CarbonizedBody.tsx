@@ -274,8 +274,8 @@ export const CarbonizedBody = ({
         <Text opacity=".7" color="white" fontSize="14px">
           {decarbonizeState === DecarbonizeState.CARBONIZED && (
             <>
-              <FontAwesomeIcon icon={faInfoCircle} />
-              72 hour decarbonization period before withdraw is available{" "}
+              <FontAwesomeIcon icon={faInfoCircle} /> 72 hour decarbonization
+              period before withdraw is available{" "}
             </>
           )}
           {decarbonizeState === DecarbonizeState.DECARBONIZING && (
