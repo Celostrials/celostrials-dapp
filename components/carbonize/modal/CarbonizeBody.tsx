@@ -9,11 +9,12 @@ import {
   AspectRatio,
   Image,
   Text,
+  Heading,
 } from "@chakra-ui/react"
 import {
   ApprovalState,
-  useApproveCelostrials,
-} from "../../../hooks/useApproveCelostrials"
+  useApproveCelostrial,
+} from "../../../hooks/useApproveCelostrial"
 import { config } from "../../../config/config"
 import { useCelo } from "@celo/react-celo"
 import { useIsMounted } from "../../../hooks/useIsMounted"
@@ -37,10 +38,10 @@ export const CarbonizeBody = ({
   const { address, getConnectedKit } = useCelo()
 
   const {
-    approve: approveCelostrials,
+    approve: approveCelostrial,
     approving: approvingCelostrials,
     approvalState: approvalStateCelostrials,
-  } = useApproveCelostrials(config.CARBONIZED_ADDRESS)
+  } = useApproveCelostrial(config.CARBONIZED_ADDRESS, Number(tokenId))
 
   const { carbonize, carbonizing } = useCarbonize()
 
@@ -66,6 +67,7 @@ export const CarbonizeBody = ({
       }}
       isLoading={carbonizing}
       loadingText={"Carbonizing"}
+      isDisabled={Number(celo) === 0 || !celo || !Number(celo)}
     >
       {"Carbonize"}
     </Button>
@@ -80,14 +82,14 @@ export const CarbonizeBody = ({
         w="100%"
         variant="solid"
         colorScheme="primary"
-        onClick={approveCelostrials}
+        onClick={() => approveCelostrial(Number(tokenId))}
         isLoading={
           approvalStateCelostrials === ApprovalState.PENDING ||
           approvingCelostrials
         }
         loadingText="Approving"
       >
-        Approve Celostrials
+        Approve Celostrial
       </Button>
     )
   }
@@ -108,22 +110,27 @@ export const CarbonizeBody = ({
           </>
         </AspectRatio>
         {approvalStateCelostrials === ApprovalState.APPROVED ? (
-          <VStack p="1em" borderRadius={"lg"} bgColor="#242424">
-            <HStack>
-              <CeloGlyph w="2em" h="2em" />
-              <VStack>
-                <CurrencyInput onInput={(e) => setCelo(e)} value={celo} />
-                <Text
-                  ml="1em !important"
-                  color="white"
-                  alignSelf={"flex-start"}
-                  opacity=".5"
-                >
-                  balance: {celoBalance}
-                </Text>
-              </VStack>
-            </HStack>
-          </VStack>
+          <>
+            <Heading alignSelf={"center"} color="white">
+              Input Celo Amount
+            </Heading>
+            <VStack p="1em" borderRadius={"lg"} bgColor="#242424">
+              <HStack>
+                <CeloGlyph w="2em" h="2em" />
+                <VStack>
+                  <CurrencyInput onInput={(e) => setCelo(e)} value={celo} />
+                  <Text
+                    ml="1em !important"
+                    color="white"
+                    alignSelf={"flex-start"}
+                    opacity=".5"
+                  >
+                    balance: {celoBalance}
+                  </Text>
+                </VStack>
+              </HStack>
+            </VStack>
+          </>
         ) : (
           <Stack w="100%" opacity=".1">
             <Skeleton h="2em" />

@@ -13,14 +13,15 @@ import { Celostrials } from "../types/Celostrials"
 export type UseAllowanceResponse = {
   mutate: KeyedMutator<any>
   update: () => Promise<any>
-  approvedForAll: boolean
+  approved: boolean
   loading: boolean
   initialLoading: boolean
   error: any
 }
 
-export const useAllowanceCelostrials = (
+export const useAllowanceCelostrial = (
   spender: string,
+  tokenId: number,
   owner?: string,
 ): UseAllowanceResponse => {
   const signer = useConnectedSigner()
@@ -35,15 +36,15 @@ export const useAllowanceCelostrials = (
   ) as Celostrials
 
   const inputs = useMemo(
-    () => ["ApprovedForAll", owner, spender],
-    [owner, spender],
+    () => ["Approved", tokenId, spender],
+    [spender, tokenId],
   )
-  const shouldFetch = !!address && !!celostrials && !!celostrials
+  const shouldFetch = !!address && !!tokenId && !!celostrials && !!celostrials
 
   const func =
     (contract: Celostrials) =>
-    async (_: string, owner: string, spender: string) =>
-      await contract.isApprovedForAll(owner, spender)
+    async (_: string, tokenId: number, spender: string) =>
+      (await contract.getApproved(tokenId)) == spender
 
   const result = useNoCacheSWR<boolean>(
     shouldFetch ? inputs : null,
@@ -59,11 +60,11 @@ export const useAllowanceCelostrials = (
   const updateAllowance = useDebounceCallback(update)
 
   const subscribeToUpdates = useCallback(() => {
-    if (!address || !provider || !celostrials) return
+    if (!address || !provider || !celostrials || !tokenId) return
 
     try {
       const transfer = celostrials.filters.Transfer(address, spender)
-      const approve = celostrials.filters.Approval(address, spender)
+      const approve = celostrials.filters.Approval(address, spender, tokenId)
 
       provider.on(transfer, updateAllowance)
       provider.on(approve, updateAllowance)
@@ -73,7 +74,7 @@ export const useAllowanceCelostrials = (
         provider.off(approve, updateAllowance)
       }
     } catch (error) {}
-  }, [provider, celostrials, address, spender, updateAllowance])
+  }, [provider, tokenId, celostrials, address, spender, updateAllowance])
 
   useEffect(subscribeToUpdates, [subscribeToUpdates])
 
@@ -81,7 +82,7 @@ export const useAllowanceCelostrials = (
     mutate,
     update,
 
-    get approvedForAll() {
+    get approved() {
       return result.data ?? false
     },
     get loading() {
