@@ -62,23 +62,26 @@ export const Carbonize = () => {
           .
         </Text>
         <Center
-          my={{ md: "6em !important", base: "3em !important" }}
+          w="100%"
+          my={{ md: "0 !important", base: "3em !important" }}
           alignSelf="center"
         >
           <Link
             onClick={() => router.push("/carbon")}
-            w={"15em"}
+            w={"100%"}
             _active={{ boxShadow: "none" }}
             _focus={{ boxShadow: "none" }}
+            _hover={{ textDecoration: "none" }}
           >
             <Button
               my="2em !important"
-              w={{ md: "initial", base: "20em" }}
+              w="100%"
               variant="solid"
               colorScheme="primary"
               textDecoration="none !important"
               size="lg"
               rightIcon={<FontAwesomeIcon icon={faCubes} />}
+              borderRadius="10em"
             >
               CARBONIZE
             </Button>
