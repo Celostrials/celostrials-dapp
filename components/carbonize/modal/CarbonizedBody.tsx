@@ -57,12 +57,13 @@ export const CarbonizedBody = ({
 
   const fetchData = async () => {
     if (!signer) return
-    setLoading(true)
+
     const carbonizer = Carbonizer__factory.connect(
       await carbonizedCollection.carbonizer(Number(tokenId)),
       signer,
     )
-
+    setDeposit(Number(formatEther(await carbonizer.getDeposit())))
+    setLoading(true)
     const result = await fetch(
       `https://app.spirals.so/api/impact/${carbonizer.address}`,
       {
@@ -78,7 +79,6 @@ export const CarbonizedBody = ({
     const _TC02 = json.user.altUnits.TC02
     console.log(json)
     setCarbonRetired(_TC02)
-    setDeposit(Number(formatEther(await carbonizer.getDeposit())))
     setLoading(false)
   }
 
@@ -179,52 +179,50 @@ export const CarbonizedBody = ({
           {loading ? (
             <Spinner color="white" />
           ) : (
-            <>
-              <VStack>
-                <HStack>
-                  <Stack>
-                    <Image
-                      filter="drop-shadow(3px -2px 0 white) drop-shadow(-3px -2px 0 white) drop-shadow(0px 4px 0 white)"
-                      alt="NCT.png"
-                      src="/images/NCT.png"
-                      w="2em"
-                    />
-                  </Stack>
-                  <Text fontSize="40px" color="white">
-                    {carbonRetired || 0}
-                  </Text>
-                </HStack>
-                <Text
-                  mt="-.5em !important"
-                  fontWeight={"medium"}
-                  color="white"
-                  fontSize={"large"}
-                >
-                  carbon retired (tons)
+            <VStack>
+              <HStack>
+                <Stack>
+                  <Image
+                    filter="drop-shadow(3px -2px 0 white) drop-shadow(-3px -2px 0 white) drop-shadow(0px 4px 0 white)"
+                    alt="NCT.png"
+                    src="/images/NCT.png"
+                    w="2em"
+                  />
+                </Stack>
+                <Text fontSize="40px" color="white">
+                  {carbonRetired || 0}
                 </Text>
-              </VStack>
-              <Divider mt="1.5em !important" />
-              <VStack>
-                <HStack>
-                  <CeloGlyph w="2em" h="2em" />
-                  <Text fontSize="40px" color="white">
-                    {decarbonizeState === DecarbonizeState.DECARBONIZED ||
-                    decarbonizeState === DecarbonizeState.DECARBONIZING
-                      ? withdrawalAmount
-                      : deposit}
-                  </Text>
-                </HStack>
-                <Text
-                  mt="-.5em !important"
-                  fontWeight={"medium"}
-                  color="white"
-                  fontSize={"large"}
-                >
-                  deposited
-                </Text>
-              </VStack>
-            </>
+              </HStack>
+              <Text
+                mt="-.5em !important"
+                fontWeight={"medium"}
+                color="white"
+                fontSize={"large"}
+              >
+                carbon retired (tons)
+              </Text>
+            </VStack>
           )}
+          <Divider mt="1.5em !important" />
+          <VStack>
+            <HStack>
+              <CeloGlyph w="2em" h="2em" />
+              <Text fontSize="40px" color="white">
+                {decarbonizeState === DecarbonizeState.DECARBONIZED ||
+                decarbonizeState === DecarbonizeState.DECARBONIZING
+                  ? withdrawalAmount
+                  : deposit}
+              </Text>
+            </HStack>
+            <Text
+              mt="-.5em !important"
+              fontWeight={"medium"}
+              color="white"
+              fontSize={"large"}
+            >
+              deposited
+            </Text>
+          </VStack>
         </VStack>
         {isCarbonizing && (
           <VStack p="1em" borderRadius={"lg"} bgColor="#242424">
