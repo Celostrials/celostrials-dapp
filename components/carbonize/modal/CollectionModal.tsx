@@ -7,10 +7,10 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react"
 import { memo } from "react"
-import { CarbonizationBody } from "./CarbonizationBody"
-import { DecarbonizationBody } from "./DecarbonizationBody"
+import { CarbonizeBody } from "./CarbonizeBody"
+import { CarbonizedBody } from "./CarbonizedBody"
 
-interface CarbonizeModalProps {
+interface CollectionModalProps {
   isOpen: boolean
   onClose: () => void
   setFetched: (val: boolean) => void
@@ -18,14 +18,14 @@ interface CarbonizeModalProps {
   carbonize: boolean
 }
 
-export const CarbonizeModal = memo(
+export const CollectionModal = memo(
   ({
     isOpen,
     onClose,
     setFetched,
     tokenId,
     carbonize,
-  }: CarbonizeModalProps) => {
+  }: CollectionModalProps) => {
     return (
       <Modal
         isOpen={isOpen}
@@ -40,14 +40,14 @@ export const CarbonizeModal = memo(
               <ModalHeader alignSelf={"center"} color="white">
                 Carbonize #{tokenId}
               </ModalHeader>
-              <CarbonizationBody tokenId={tokenId} setFetched={setFetched} />
+              <CarbonizeBody tokenId={tokenId} setFetched={setFetched} />
             </>
           ) : (
             <>
               <ModalHeader alignSelf={"center"} color="white">
                 #{tokenId}
               </ModalHeader>
-              <DecarbonizationBody tokenId={tokenId} onClose={onClose} />
+              <CarbonizedBody tokenId={tokenId} onClose={onClose} />
             </>
           )}
         </ModalContent>
@@ -56,4 +56,4 @@ export const CarbonizeModal = memo(
   },
 )
 
-CarbonizeModal.displayName = "CarbonizeModal"
+CollectionModal.displayName = "CollectionModal"

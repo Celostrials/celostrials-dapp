@@ -1,9 +1,19 @@
-import { Flex, VStack, Container, Heading } from "@chakra-ui/react"
+import {
+  Flex,
+  VStack,
+  Container,
+  Heading,
+  Stack,
+  HStack,
+  Tooltip,
+} from "@chakra-ui/react"
 import * as am5 from "@amcharts/amcharts5"
 import * as am5xy from "@amcharts/amcharts5/xy"
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated"
 import am5themes_Dark from "@amcharts/amcharts5/themes/Dark"
 import { useLayoutEffect } from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons"
 
 export const CarbonizedGraph = ({ data }: { data: Object }) => {
   useLayoutEffect(() => {
@@ -295,15 +305,18 @@ export const CarbonizedGraph = ({ data }: { data: Object }) => {
   return (
     <Flex width="100%" color="white" align="center" flexDir="column">
       <VStack width="100%" mt="2em">
-        <Heading
-          lineHeight="1em"
-          fontSize="40px"
-          fontWeight="extrabold"
-          fontStyle="italic"
-          alignSelf="flex-start"
-        >
-          TOP CARBONIZERS
-        </Heading>
+        <HStack alignSelf="flex-start">
+          <Heading
+            lineHeight="1em"
+            fontSize="40px"
+            fontWeight="extrabold"
+            fontStyle="italic"
+            alignSelf="flex-start"
+          >
+            CARBON COMPETITION{" "}
+            <span style={{ fontSize: "16px" }}>(Sample)</span>
+          </Heading>
+        </HStack>
         <Container maxW="container.lg" id="mint" padding="0 !important">
           <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>
         </Container>

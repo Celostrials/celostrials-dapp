@@ -23,7 +23,7 @@ import { CurrencyInput } from "../input/index"
 import { CeloGlyph } from "../../Icon"
 import { useCarbonize } from "../../../hooks/useCarbonize"
 
-export const CarbonizationBody = ({
+export const CarbonizeBody = ({
   tokenId,
   setFetched,
 }: {

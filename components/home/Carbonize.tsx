@@ -77,9 +77,10 @@ export const Carbonize = () => {
               variant="solid"
               colorScheme="primary"
               textDecoration="none !important"
+              size="lg"
               rightIcon={<FontAwesomeIcon icon={faCubes} />}
             >
-              Carbonize
+              CARBONIZE
             </Button>
           </Link>
         </Center>

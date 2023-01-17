@@ -9,6 +9,7 @@ import {
   Text,
   Stack,
   Divider,
+  Spinner,
 } from "@chakra-ui/react"
 import { useCelo, useConnectedSigner } from "@celo/react-celo"
 import { useIsMounted } from "../../../hooks/useIsMounted"
@@ -23,14 +24,14 @@ import { formatEther } from "ethers/lib/utils"
 import { CurrencyInput } from "../input"
 import { useCarbonize } from "../../../hooks/useCarbonize"
 
-export const DecarbonizationBody = ({
+export const CarbonizedBody = ({
   tokenId,
   onClose,
 }: {
   tokenId: string
   onClose: () => void
 }) => {
-  const url = "https://celostrials.s3.us-west-2.amazonaws.com/"
+  const url = "https://celostrials-carbonized.s3.amazonaws.com/"
   const isMounted = useIsMounted()
   const { address, getConnectedKit } = useCelo()
   const carbonizedCollection = useCarbonizedContract()
@@ -38,6 +39,7 @@ export const DecarbonizationBody = ({
   const [carbonRetired, setCarbonRetired] = useState("")
   const [deposit, setDeposit] = useState(0)
   const [isCarbonizing, setIsCarbonizing] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [celoBalance, setCeloBalance] = useState("")
   const [celo, setCelo] = useState("")
 
@@ -55,13 +57,29 @@ export const DecarbonizationBody = ({
 
   const fetchData = async () => {
     if (!signer) return
+    setLoading(true)
     const carbonizer = Carbonizer__factory.connect(
       await carbonizedCollection.carbonizer(Number(tokenId)),
       signer,
     )
-    const yieldVal = Number(formatEther(await carbonizer.getYield()))
-    setCarbonRetired(yieldVal >= 1 ? yieldVal.toFixed(2) : yieldVal.toFixed(8))
+
+    const result = await fetch(
+      `https://app.spirals.so/api/impact/${carbonizer.address}`,
+      {
+        method: "GET",
+        headers: {
+          "x-api-key":
+            "c65231491330ecbd6c59a15a2c11171ed01d2ba5b971d7bded29f4faa8097699",
+        },
+      },
+    )
+    if (!result) return
+    const json = await result.json()
+    const _TC02 = json.user.altUnits.TC02
+    console.log(json)
+    setCarbonRetired(_TC02)
     setDeposit(Number(formatEther(await carbonizer.getDeposit())))
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -143,57 +161,70 @@ export const DecarbonizationBody = ({
             <Image
               draggable={false}
               userSelect="none"
-              src={`${url}${tokenId}.png`}
+              src={`${url}${tokenId}.gif`}
               objectFit="cover"
               borderRadius="2em"
               alt={"alien"}
             />
           </>
         </AspectRatio>
-        <VStack w="100%" p="1em" borderRadius={"lg"} bgColor="#242424">
-          <VStack>
-            <HStack>
-              <Stack>
-                <Image
-                  filter="drop-shadow(3px -2px 0 white) drop-shadow(-3px -2px 0 white) drop-shadow(0px 4px 0 white)"
-                  alt="NCT.png"
-                  src="/images/NCT.png"
-                  w="2em"
-                />
-              </Stack>
-              <Text fontSize="40px" color="white">
-                {carbonRetired}
-              </Text>
-            </HStack>
-            <Text
-              mt="-.5em !important"
-              fontWeight={"medium"}
-              color="white"
-              fontSize={"large"}
-            >
-              tons of carbon retired
-            </Text>
-          </VStack>
-          <Divider mt="1.5em !important" />
-          <VStack>
-            <HStack>
-              <CeloGlyph w="2em" h="2em" />
-              <Text fontSize="40px" color="white">
-                {decarbonizeState === DecarbonizeState.DECARBONIZED ||
-                decarbonizeState === DecarbonizeState.DECARBONIZING
-                  ? withdrawalAmount
-                  : deposit}
-              </Text>
-            </HStack>
-            <Text
-              mt="-.5em !important"
-              fontWeight={"medium"}
-              color="white"
-              fontSize={"large"}
-            >
-              deposited
-            </Text>
-          </VStack>
+        <VStack
+          w="100%"
+          minH={"15em"}
+          p="1em"
+          borderRadius={"lg"}
+          bgColor="#242424"
+          justifyContent={"center"}
+        >
+          {loading ? (
+            <Spinner color="white" />
+          ) : (
+            <>
+              <VStack>
+                <HStack>
+                  <Stack>
+                    <Image
+                      filter="drop-shadow(3px -2px 0 white) drop-shadow(-3px -2px 0 white) drop-shadow(0px 4px 0 white)"
+                      alt="NCT.png"
+                      src="/images/NCT.png"
+                      w="2em"
+                    />
+                  </Stack>
+                  <Text fontSize="40px" color="white">
+                    {carbonRetired || 0}
+                  </Text>
+                </HStack>
+                <Text
+                  mt="-.5em !important"
+                  fontWeight={"medium"}
+                  color="white"
+                  fontSize={"large"}
+                >
+                  tons of carbon retired
+                </Text>
+              </VStack>
+              <Divider mt="1.5em !important" />
+              <VStack>
+                <HStack>
+                  <CeloGlyph w="2em" h="2em" />
+                  <Text fontSize="40px" color="white">
+                    {decarbonizeState === DecarbonizeState.DECARBONIZED ||
+                    decarbonizeState === DecarbonizeState.DECARBONIZING
+                      ? withdrawalAmount
+                      : deposit}
+                  </Text>
+                </HStack>
+                <Text
+                  mt="-.5em !important"
+                  fontWeight={"medium"}
+                  color="white"
+                  fontSize={"large"}
+                >
+                  deposited
+                </Text>
+              </VStack>
+            </>
+          )}
         </VStack>
         {isCarbonizing && (
           <VStack p="1em" borderRadius={"lg"} bgColor="#242424">

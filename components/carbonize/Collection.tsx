@@ -17,13 +17,14 @@ import { useCelo, useConnectedSigner } from "@celo/react-celo"
 import { ConnectButton } from "../account/ConnectButton"
 import { Spinner, Stack, HStack, Center, Divider } from "@chakra-ui/react"
 import { useCarbonizedContract } from "../../hooks/useCarbonizedContract"
-import { CarbonizeModal } from "./modal/CarbonizeModal"
+import { CollectionModal } from "./modal/CollectionModal"
 import { useRouter } from "next/router"
 import { ethToString, weiToString } from "../../functions/bignumber"
 import colors from "../../styles/theme/foundations/colors"
 
 export const Collection = () => {
-  const url = "https://celostrials.s3.us-west-2.amazonaws.com/"
+  const originalURL = "https://celostrials.s3.us-west-2.amazonaws.com/"
+  const carbonizedURL = "https://celostrials-carbonized.s3.amazonaws.com/"
   const router = useRouter()
   const { walletOfOwner } = useCelostrialsContract()
   const { walletOfOwner: carbonWalletOfOwner } = useCarbonizedContract()
@@ -174,45 +175,29 @@ export const Collection = () => {
                       <Stack
                         _hover={{ cursor: "pointer" }}
                         key={index}
-                        bgColor={isCarbonized(id) ? "white" : "inherit"}
                         onClick={() => setSelected(id)}
-                        borderRadius={
-                          isCarbonized(id) ? "40px !important" : "inherit"
-                        }
                       >
                         <AspectRatio
                           key={id}
                           maxW="20em"
                           ratio={1}
                           _hover={{ cursor: "pointer" }}
-                          className={
-                            isCarbonized(id) ? "rainbow-box-border" : ""
-                          }
-                          borderRadius={
-                            isCarbonized(id) ? "40px !important" : "inherit"
-                          }
                         >
                           <>
                             <Image
                               draggable={false}
                               userSelect="none"
-                              src={`${url}${id}.png`}
+                              src={
+                                isCarbonized(id)
+                                  ? `${carbonizedURL}${id}.gif`
+                                  : `${originalURL}${id}.png`
+                              }
                               objectFit="cover"
                               borderRadius="2em"
                               alt={"alien"}
                             />
                           </>
                         </AspectRatio>
-                        {isCarbonized(id) && (
-                          <Stack
-                            overflow="inherit !important"
-                            justifyContent="flex-start !important"
-                            alignItems="flex-end !important"
-                            mt="0em !important"
-                            // @ts-ignore
-                            position="absolute !important"
-                          ></Stack>
-                        )}
                       </Stack>
                     ))}
                 </SimpleGrid>
@@ -222,7 +207,7 @@ export const Collection = () => {
           </>
         )}
       </VStack>
-      <CarbonizeModal
+      <CollectionModal
         isOpen={isOpen}
         onClose={onClose}
         tokenId={selected}
