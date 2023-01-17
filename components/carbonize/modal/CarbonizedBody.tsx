@@ -200,7 +200,7 @@ export const CarbonizedBody = ({
                   color="white"
                   fontSize={"large"}
                 >
-                  tons of carbon retired
+                  carbon retired (tons)
                 </Text>
               </VStack>
               <Divider mt="1.5em !important" />
@@ -274,8 +274,8 @@ export const CarbonizedBody = ({
         <Text opacity=".7" color="white" fontSize="14px">
           {decarbonizeState === DecarbonizeState.CARBONIZED && (
             <>
-              72 hour decarbonization period before withdraw is available{" "}
               <FontAwesomeIcon icon={faInfoCircle} />
+              72 hour decarbonization period before withdraw is available{" "}
             </>
           )}
           {decarbonizeState === DecarbonizeState.DECARBONIZING && (
