@@ -24,11 +24,10 @@ export const Roadmap = () => {
           fontWeight="extrabold"
           fontStyle="italic"
         >
-          CELOSTRIALS ROADMAP{" "}
-          <span style={{ color: colors.orange.dark }}>2022</span>
+          CELOSTRIALS <span style={{ color: colors.orange.dark }}>ROADMAP</span>
         </Heading>
         <Text mb="-2em !important" color="gray.400">
-          Q1
+          Feb 2022
         </Text>
         <RoadmapItem
           titleAccent={"LIVE"}
@@ -46,13 +45,13 @@ export const Roadmap = () => {
           alt="Q1"
         />
         <Text mb="-2em !important" color="gray.400">
-          Q2
+          Jan 2023
         </Text>
         <RoadmapItem
           titleAccent={"CARBON"}
           title={"IZED CELOSTRIALS"}
           body={
-            "Partnership with Toucan and Celo to bring carbonization and staking to the Celostrials universe"
+            "Partnership with Toucan, Spirals and Celo to bring carbonization to the Celostrials universe"
           }
         />
         <Image
@@ -62,44 +61,6 @@ export const Roadmap = () => {
           mb={"-2em !important"}
           src="images/Q2.png"
           alt="Q2"
-        />
-        <Text mb="-2em !important" color="gray.400">
-          Q3
-        </Text>
-        <RoadmapItem
-          titleAccent={"LIMITED"}
-          title={" EDITION MERCH"}
-          body={
-            "Member Exclusive Celostrial Merch store gets unlocked, featuring Limited editon tees"
-          }
-        />
-        <Image
-          alignSelf="center"
-          w="75% !important"
-          mt="3em !important"
-          mb={"-2em !important"}
-          src="images/Q3.png"
-          alt="Q3"
-        />
-        <Text mb="-2em !important" color="gray.400">
-          Q4
-        </Text>
-        <RoadmapItem
-          titleAccent={"SOL"}
-          title={"ESTRIALS"}
-          titleAccent2={"ETH"}
-          title2={"ESTRIALS"}
-          body={
-            "Limited special collections on Solana and Ethereum, discounts and early access for Celostrial holders."
-          }
-        />
-        <Image
-          alignSelf="center"
-          w="75% !important"
-          mt="3em !important"
-          mb={"-2em !important"}
-          src="images/Q4.png"
-          alt="Q4"
         />
       </VStack>
     )
@@ -113,33 +74,21 @@ export const Roadmap = () => {
           fontStyle="italic"
           mb="2em"
         >
-          CELOSTRIALS ROADMAP{" "}
-          <span style={{ color: colors.orange.dark }}>2022</span>
+          CELOSTRIALS <span style={{ color: colors.orange.dark }}>ROADMAP</span>
         </Heading>
-        <VStack>
-          <HStack ml="12em" alignSelf="flex-start">
-            <RoadmapItem
-              titleAccent={"CARBON"}
-              title={"IZED CELOSTRIALS"}
-              body={
-                "Partnership with Toucan and Celo to bring carbonization and staking to the Celostrials universe"
-              }
+        <HStack w="100%" justifyContent={"space-between"}>
+          <VStack alignItems={"flex-start"}>
+            <Text mb="-2em !important" color="gray.400">
+              Feb 2022
+            </Text>
+            <Image
+              alignSelf="flex-start"
+              w="10em"
+              mt="3em !important"
+              mb="-5em !important"
+              src="images/Q1.png"
+              alt="Q1"
             />
-
-            <RoadmapItem
-              titleAccent={"SOL"}
-              title={"ESTRIALS"}
-              titleAccent2={"ETH"}
-              title2={"ESTRIALS"}
-              body={
-                "Limited special collections on Solana and Ethereum, discounts and early access for Celostrial holders."
-              }
-              ml="8em !important"
-            />
-          </HStack>
-          <Image alt="roadmap" src="images/roadmap.png" mt="-2em !important" />
-
-          <HStack mt="-6em !important" alignSelf="flex-start">
             <RoadmapItem
               titleAccent={"LIVE"}
               title={" MINT INVASION"}
@@ -147,16 +96,25 @@ export const Roadmap = () => {
                 "5% of mint funds go to eradicating poverty around the world via the Impact Market's decentralized poverty alleviation protocol"
               }
             />
-            <RoadmapItem
-              titleAccent={"LIMITED"}
-              title={" EDITION MERCH"}
-              body={
-                "Member Exclusive Celostrial Merch store gets unlocked, featuring Limited editon tees"
-              }
-              ml="8em !important"
+          </VStack>
+          <VStack alignItems={"flex-start"}>
+            <Text color="gray.400">Jan 2023</Text>
+            <Image
+              mb="-5em !important"
+              alignSelf="flex-start"
+              w="10em"
+              src="images/Q2.png"
+              alt="Q2"
             />
-          </HStack>
-        </VStack>
+            <RoadmapItem
+              titleAccent={"CARBON"}
+              title={"IZED CELOSTRIALS"}
+              body={
+                "Partnership with Toucan, Spirals and Celo to bring carbonization to the Celostrials universe"
+              }
+            />
+          </VStack>
+        </HStack>
       </VStack>
     )
   }

@@ -1,4 +1,4 @@
-import { Center, Button } from "@chakra-ui/react"
+import { Center, Button, Icon as ChakraIcon } from "@chakra-ui/react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   Box,
@@ -25,7 +25,7 @@ export const Carbonize = () => {
       pt="4"
       justifyContent="space-between"
     >
-      <VStack alignItems="flex-start" maxW="35em">
+      <VStack alignItems="flex-start" maxW={{ md: "35em", base: "100%" }}>
         <Heading
           lineHeight="1em"
           fontSize="40px"
@@ -35,8 +35,11 @@ export const Carbonize = () => {
           CARBONIZE YOUR CELOSTRIAL
         </Heading>
         <Text fontSize="md">
-          In partnership with Celo and Toucan, Celostrial holders are able to
-          carbonize their alien collection to earn climate activity rewards!
+          Celostrial holders are able to carbonize their collection by staking
+          Celo onto each of their NFTs. The more Celo staked, the more carbon is
+          removed from the atmosphere. Carbonized NFTs then compete in carbon
+          competitions for climate activity rewards that are given at random to
+          the top Carbonizers in a given period.
         </Text>
         <Text fontSize="md">
           To learn more about the carbon extraction market and how you can take
@@ -47,6 +50,14 @@ export const Carbonize = () => {
             target="_blank"
           >
             toucan.earth
+          </Link>{" "}
+          and{" "}
+          <Link
+            fontWeight="extrabold"
+            href="https://www.spirals.so/"
+            target="_blank"
+          >
+            spirals.so
           </Link>
           .
         </Text>
@@ -75,7 +86,7 @@ export const Carbonize = () => {
       </VStack>
       <VStack minW="20em" alignSelf={{ md: "initial", base: "center" }}>
         <Image
-          src={"images/carbonized2.gif"}
+          src={"images/carbonized_preview.gif"}
           borderRadius="1em"
           maxW="21em"
           alt={"alien1"}
