@@ -48,6 +48,7 @@ export const Carbonize = () => {
             fontWeight="extrabold"
             href="https://toucan.earth/"
             target="_blank"
+            color={colors.orange.dark}
           >
             toucan.earth
           </Link>{" "}
@@ -56,6 +57,7 @@ export const Carbonize = () => {
             fontWeight="extrabold"
             href="https://www.spirals.so/"
             target="_blank"
+            color={colors.orange.dark}
           >
             spirals.so
           </Link>
