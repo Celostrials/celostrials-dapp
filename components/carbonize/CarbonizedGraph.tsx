@@ -6,16 +6,25 @@ import {
   Stack,
   HStack,
   Tooltip,
+  ScaleFade,
 } from "@chakra-ui/react"
 import * as am5 from "@amcharts/amcharts5"
 import * as am5xy from "@amcharts/amcharts5/xy"
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated"
 import am5themes_Dark from "@amcharts/amcharts5/themes/Dark"
-import { useLayoutEffect } from "react"
+import { useLayoutEffect, useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons"
+import colors from "../../styles/theme/foundations/colors"
+import { useInterval } from "../../hooks/useInterval"
 
 export const CarbonizedGraph = ({ data }: { data: Object }) => {
+  const [comingSoon, setComingSoon] = useState(false)
+
+  useInterval(() => {
+    setComingSoon(true)
+  }, 32000)
+
   useLayoutEffect(() => {
     let root = am5.Root.new("chartdiv")
 
@@ -305,6 +314,13 @@ export const CarbonizedGraph = ({ data }: { data: Object }) => {
   return (
     <Flex width="100%" color="white" align="center" flexDir="column">
       <VStack width="100%" mt="2em">
+        <Stack position="absolute" mt="15em">
+          <ScaleFade initialScale={0.9} in={comingSoon}>
+            <Heading size="2xl" color={colors.orange.dark}>
+              COMING SOON
+            </Heading>
+          </ScaleFade>
+        </Stack>
         <HStack alignSelf="flex-start">
           <Heading
             lineHeight="1em"
@@ -313,11 +329,16 @@ export const CarbonizedGraph = ({ data }: { data: Object }) => {
             fontStyle="italic"
             alignSelf="flex-start"
           >
-            CARBON COMPETITION{" "}
-            <span style={{ fontSize: "16px" }}>(Sample)</span>
+            CARBON COMPETITIONS{" "}
+            <span style={{ fontSize: "16px" }}>(COMING SOON)</span>
           </Heading>
         </HStack>
-        <Container maxW="container.lg" id="mint" padding="0 !important">
+        <Container
+          opacity={comingSoon ? ".2" : "1"}
+          maxW="container.lg"
+          id="mint"
+          padding="0 !important"
+        >
           <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>
         </Container>
       </VStack>
