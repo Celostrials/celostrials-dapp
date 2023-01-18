@@ -23,7 +23,7 @@ export const CarbonizedGraph = ({ data }: { data: Object }) => {
 
   useInterval(() => {
     setComingSoon(true)
-  }, 32000)
+  }, 5000)
 
   useLayoutEffect(() => {
     let root = am5.Root.new("chartdiv")
@@ -315,7 +315,7 @@ export const CarbonizedGraph = ({ data }: { data: Object }) => {
     <Flex width="100%" color="white" align="center" flexDir="column">
       <VStack width="100%" mt="2em">
         <Stack position="absolute" mt="15em">
-          <ScaleFade initialScale={0.9} in={comingSoon}>
+          <ScaleFade delay={0.5} initialScale={0.9} in={comingSoon}>
             <Heading size="2xl" color={colors.orange.dark}>
               COMING SOON
             </Heading>
