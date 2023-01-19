@@ -6,6 +6,9 @@ import {
   Image,
   Center,
   Spinner,
+  Heading,
+  Stack,
+  Text,
 } from "@chakra-ui/react"
 import dynamic from "next/dynamic"
 import { useState, useEffect } from "react"
@@ -70,6 +73,43 @@ export const CarbonCards = () => {
               w="40em"
             />
           </Center>
+          <HStack w="100%" justifyContent={"space-between"}>
+            <Stack mt=".5em !important" alignSelf={"flex-start"}>
+              <Heading
+                lineHeight="1em"
+                fontSize="40px"
+                fontWeight="extrabold"
+                alignSelf="flex-start"
+              >
+                Carbonize
+              </Heading>
+              <Text fontSize="md">
+                To carbonize, first mint a{" "}
+                <span style={{ fontWeight: "bold" }}>Celostrial</span> (or 2
+                👽). Once minted, your new friend will appear in "Your
+                Collection" bellow. To carbonize, select a Celostrial and
+                provide the amount of Celo you want stake. The more Celo you
+                stake, the more carbon your alien will collect!
+              </Text>
+              <Text fontSize="md">
+                Coming soon,{" "}
+                <span style={{ fontWeight: "bold" }}>Carbon Competitions</span>{" "}
+                will be held periodically that reward top carbonizers with Celo
+                prizes.
+              </Text>
+              <Text fontSize="md" color="gray.500">
+                Note: Decarbonizing requires a 72 hour withdraw period, after
+                which all funds can be claimed.
+              </Text>
+              <Text fontSize="md">Happy Carbonizing! 🌱</Text>
+            </Stack>
+            <Image
+              src={"/images/carbonized_preview.gif"}
+              borderRadius="1em"
+              maxW="21em"
+              alt={"alien1"}
+            />
+          </HStack>
 
           <Collection />
           <HStack w="100%" mb="3em">

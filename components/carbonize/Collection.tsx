@@ -114,7 +114,7 @@ export const Collection = () => {
                   fontStyle="italic"
                   alignSelf="flex-start"
                 >
-                  CARBONIZE YOUR COLLECTION
+                  YOUR COLLECTION
                 </Heading>
                 <Select
                   alignSelf="flex-start"
