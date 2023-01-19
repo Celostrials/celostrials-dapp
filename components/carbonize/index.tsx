@@ -88,7 +88,7 @@ export const CarbonCards = () => {
                 <span style={{ fontWeight: "bold" }}>Celostrial</span> (or 2
                 👽). Once minted, your new friend will appear in {'"'}Your
                 Collection{'"'} bellow. To carbonize, select a Celostrial and
-                provide the amount of Celo you want stake. The more Celo you
+                provide the amount of Celo you want to stake. The more Celo you
                 stake, the more carbon your alien will collect!
               </Text>
               <Text fontSize="md">
