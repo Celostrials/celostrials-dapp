@@ -89,13 +89,16 @@ export const CarbonCards = () => {
                 👽). Once minted, your new friend will appear in {'"'}Your
                 Collection{'"'} bellow. To carbonize, select a Celostrial and
                 provide the amount of Celo you want to stake. The more Celo you
-                stake, the more carbon your alien will collect!
+                stake, the more carbon your alien will collect! Collecting
+                carbon means contributing to the fight against climate change
+                ✌️.
               </Text>
               <Text fontSize="md">
                 Coming soon,{" "}
                 <span style={{ fontWeight: "bold" }}>Carbon Competitions</span>{" "}
                 will be held periodically that reward top carbonizers with Celo
-                prizes.
+                prizes. For updates, be sure to follow the Celostrials twitter
+                and join the discord.
               </Text>
               <Text fontSize="md" color="gray.500">
                 Note: Decarbonizing requires a 72 hour withdraw period, after
