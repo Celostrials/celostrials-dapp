@@ -83,6 +83,24 @@ export const FAQ = () => {
         <AccordionItem>
           <AccordionButton justifyContent="space-between">
             <Text fontSize="md" color="white" textAlign={"left"}>
+              How does Carbonization work?
+            </Text>
+            <AccordionIcon color="white" />
+          </AccordionButton>
+          <AccordionPanel pb={4}>
+            <Text color="white" textAlign={"left"}>
+              The Carbonized Collection leverages the Spirals Protocol to stake
+              CELO. The yield from staking is then committed to offsetting
+              carbon via the Toucan Protocol. Each carbonized NFT then
+              represents compounding climate impact that persists with each NFT,
+              regardless of who owns it at any given time.
+            </Text>
+          </AccordionPanel>
+        </AccordionItem>
+
+        <AccordionItem>
+          <AccordionButton justifyContent="space-between">
+            <Text fontSize="md" color="white" textAlign={"left"}>
               Why Carbonize?
             </Text>
             <AccordionIcon color="white" />
