@@ -73,16 +73,12 @@ export const CarbonCards = () => {
               w="40em"
             />
           </Center>
-          <HStack w="100%" justifyContent={"space-between"}>
-            <Stack mt=".5em !important" alignSelf={"flex-start"}>
-              <Heading
-                lineHeight="1em"
-                fontSize="40px"
-                fontWeight="extrabold"
-                alignSelf="flex-start"
-              >
-                Carbonize
-              </Heading>
+          <Stack
+            w="100%"
+            justifyContent={"space-between"}
+            direction={{ md: "row", base: "column-reverse" }}
+          >
+            <Stack mt="1em !important" alignSelf={"flex-start"}>
               <Text fontSize="md">
                 To carbonize, first mint a{" "}
                 <span style={{ fontWeight: "bold" }}>Celostrial</span> (or 2
@@ -90,8 +86,7 @@ export const CarbonCards = () => {
                 Collection{'"'} below. To carbonize, select a Celostrial and
                 provide the amount of Celo you want to stake. The more Celo you
                 stake, the more carbon your alien will collect! Collecting
-                carbon means contributing to the fight against climate change
-                ✌️.
+                carbon means contributing to the fight against climate change.
               </Text>
               <Text fontSize="md">
                 Coming soon,{" "}
@@ -104,7 +99,7 @@ export const CarbonCards = () => {
                 Note: Decarbonizing requires a 72 hour withdraw period, after
                 which all funds can be claimed.
               </Text>
-              <Text fontSize="md">Happy Carbonizing! 🌱</Text>
+              <Text fontSize="md">Happy Carbonizing!</Text>
             </Stack>
             <Image
               src={"/images/carbonized_preview.gif"}
@@ -112,7 +107,7 @@ export const CarbonCards = () => {
               maxW="21em"
               alt={"alien1"}
             />
-          </HStack>
+          </Stack>
 
           <Collection />
           <HStack w="100%" mb="3em">
