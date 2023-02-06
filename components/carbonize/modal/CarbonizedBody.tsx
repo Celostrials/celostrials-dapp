@@ -76,9 +76,9 @@ export const CarbonizedBody = ({
     )
     if (!result) return
     const json = await result.json()
-    const _TC02 = json.user.altUnits.TC02
+    const _TCO2 = json.user.altUnits.TCO2
     console.log(json)
-    setCarbonRetired(_TC02)
+    setCarbonRetired(_TCO2)
     setLoading(false)
   }
 
